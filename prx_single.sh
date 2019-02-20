@@ -152,11 +152,9 @@ echo -e "${BOLD} Masternode - \#2 IP: [$(hostname -I | cut -f2 -d' ')]:12195${CL
 echo
 echo -e ${BOLD} "If you become disconnected, you can check the status of sync ing with"${CLEAR}
 echo -e "${YELLOW}For prx-cli -datadir=/home/proxynode/.proxynode mnsync status"${CLEAR}
-echo -e "${YELLOW}For prx-cli -datadir=/home/proxynode2/.proxynode mnsync status"${CLEAR}
 echo
 echo -e "${BOLD}You can check the status of your PRX Masternode with"${CLEAR}
 echo -e "${YELLOW}For prx-cli -datadir=/home/proxynode/.proxynode masternode status"${CLEAR}
-echo -e "${YELLOW}For prx-cli -datadir=/home/proxynode2/.proxynode masternode status"${CLEAR}
 echo
 fi
 echo -e ${BLUE}" Your patronage is apprappreciated, tipping addresses"${CLEAR}

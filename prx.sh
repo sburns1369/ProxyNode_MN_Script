@@ -23,24 +23,20 @@ echo " _ __       _  _  __                                      ";
 echo "' )  )     // // /  \`     _/_                            ";
 echo " /  / . . // // /--  ____  /  __  __  ,                   ";
 echo "/  (_(_/_</_</_(___,/ / <_<__/ (_/ (_/_                   ";
-echo "                                    /                     ";
-echo "                                   '                      ";
-echo "     _ _ _                                                ";
-echo "    ' ) ) )         _/_                   /               ";
+echo "     _ _ _                          /                     ";
+echo "    ' ) ) )         _/_            '      /               ";
 echo "     / / / __.  _   /  _  __  ____  __ __/ _              ";
 echo "    / ' (_(_/|_/_)_<__</_/ (_/ / <_(_)(_/_</_             ";
-echo "                                                          ";
-echo "                                                          ";
 echo "             _                      _  _                  ";
 echo "            | )           _/_      // //     _/_          ";
 echo "        ,---|/  ____  _   /  __.  // // __.  /  o __ ____ ";
 echo "         \_/ \_/ / <_/_)_<__(_/|_</_</_(_/|_<__<_(_)/ / <_";
 echo "                                                          ";
-echo "                                                          ";
 echo -e ${YELLOW}" For ProxyNode MasterNode :: Script Version:0.08a"${CLEAR}
 echo -e ${YELLOW}"        Pre-Release Test"${CLEAR}
+read PAUSE
 echo
-echo -e ${YELLOW}"Welcome to the Feston Beta Automated Install Script by ${BLUE}NullEntry"${CLEAR}
+echo -e ${YELLOW}"Welcome to the ProxyNode Beta Automated Install Script by ${BLUE}NullEntry"${CLEAR}
 echo -e ${RED}'THE SCRIPT IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND'${CLEAR}
 echo -e ${YELLOW}"Durring this Process Please Hit Enter or Input What is Asked."${CLEAR}
 echo
