@@ -168,7 +168,6 @@ echo
 
 echo -e "${GREEN}You can check the status of your PRX Masternode with"${CLEAR}
 echo -e "${YELLOW} prx-cli -datadir=/home/proxynode/.proxynode masternode status"${CLEAR}
-echo -e "${YELLOW}For mn1: \"prx-cli -datadir=/home/proxynode/.proxynode masternode status\""${CLEAR}
 echo
 echo -e "${RED}Status 29 may take a few minutes to clear while the daemon processes the chainstate"${CLEAR}
 echo -e "${GREEN}The data below needs to be in your local masternode configuration file:${CLEAR}"
