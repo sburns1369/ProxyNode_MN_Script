@@ -6,16 +6,12 @@ RED='\033[0;91m'
 YELLOW='\033[0;93m'
 #clear font
 CLEAR='\033[0m'
-
 #Checking OS
 if [[ $(lsb_release -d) != *16.04* ]]; then
   echo -e ${RED}"The operating system is not Ubuntu 16.04. You must be running on ubuntu 16.04."${CLEAR}
   exit 1
 fi
-#Menu to Confirm and Pull correct scripts
-echo
-echo
-echo
+#Menu to Confirm and Pull correct script
 echo
 echo
 echo -e ${BLUE}
@@ -23,45 +19,45 @@ echo " _ __       _  _  __                                      ";
 echo "' )  )     // // /  \`     _/_                            ";
 echo " /  / . . // // /--  ____  /  __  __  ,                   ";
 echo "/  (_(_/_</_</_(___,/ / <_<__/ (_/ (_/_                   ";
-echo "     _ _ _                          /                     ";
-echo "    ' ) ) )         _/_            '      /               ";
+echo "                                    /                     ";
+echo "                                   '                      ";
+echo "     _ _ _                                                ";
+echo "    ' ) ) )         _/_                   /               ";
 echo "     / / / __.  _   /  _  __  ____  __ __/ _              ";
 echo "    / ' (_(_/|_/_)_<__</_/ (_/ / <_(_)(_/_</_             ";
+echo "                                                          ";
+echo "                                                          ";
 echo "             _                      _  _                  ";
 echo "            | )           _/_      // //     _/_          ";
 echo "        ,---|/  ____  _   /  __.  // // __.  /  o __ ____ ";
 echo "         \_/ \_/ / <_/_)_<__(_/|_</_</_(_/|_<__<_(_)/ / <_";
-echo "                                                          ";
-echo -e ${YELLOW}" For ProxyNode MasterNode :: Script Version:0.08a"${CLEAR}
-echo -e ${YELLOW}"        Pre-Release Test"${CLEAR}
-read PAUSE
+echo
 echo
 echo -e ${YELLOW}"Welcome to the ProxyNode Beta Automated Install Script by ${BLUE}NullEntry"${CLEAR}
-echo -e ${RED}'THE SCRIPT IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND'${CLEAR}
-echo -e ${YELLOW}"Durring this Process Please Hit Enter or Input What is Asked."${CLEAR}
+echo -e ${RED}'THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND'${CLEAR}
 echo
 echo -e ${GREEN}"Are you sure you want to install ProxyNode Masternode(s)?"${CLEAR}
-echo -e ${GREEN} "Press y for yes, and n for no followed by [ENTER]:"${CLEAR}
+echo -e ${GREEN} "Press y for yes and [ENTER]:"${CLEAR}
 read AGREE
 if [[ $AGREE =~ "y" ]] ; then
+echo -e ${YELLOW}"IPv6 support is required for 2 or more Masternodes"${CLEAR}
+echo -e ${YELLOW}"Vultr Users - Check Support IPv6 on initial Server Selection"${CLEAR}
 echo
-echo
-echo
-echo -e ${RED}"PLEASE READ "${CLEAR}
-#echo -e ${YELLOW}"Installing more then 2 Masternodes, Masternode may not function correctly"${CLEAR}
-echo -e ${YELLOW}"If you don't receive payment for multiple mastnodes, contact Support "${CLEAR}
-echo -e ${YELLOW}"Find Sburns1369#1584 on Discord - https://discord.gg/YhJ8v3g"${CLEAR}
-echo
-echo -e ${GREEN}"(1) = 1 IPv4 Masternode"${CLEAR}
-echo -e ${GREEN}"(2) = 1 IPv4 Masternode and 1 IPv6 Masternode"${CLEAR}
-echo -e ${GREEN}"Please enter the number (1-2) of $COIN Masternode(s)"${CLEAR}
+echo -e ${GREEN}"Please enter the number (1-8) of $COIN Masternode(s)"${CLEAR}
+echo -e ${YELLOW}" -If your VPS doesn't support IPv6 press 0 for 1 IPv4"${CLEAR}
 echo -e ${GREEN}"you would like to install :"${CLEAR}
 read NUMBER
 case $NUMBER in
-  1)bash <(curl -Ls https://raw.githubusercontent.com/sburns1369/ProxyNode_MN_Script/master/prx_single.sh);;
-  2)bash <(curl -Ls https://raw.githubusercontent.com/sburns1369/ProxyNode_MN_Script/master/prx_2pack.sh);;
+  0)bash <(curl -Ls https://raw.githubusercontent.com/sburns1369/ProxyNode_MN_Script/master/DeLion_singleV4.sh);;
+  1)bash <(curl -Ls https://raw.githubusercontent.com/sburns1369/ProxyNode_MN_Script/master/DeLion_singleV6.sh);;
+  2)bash <(curl -Ls https://raw.githubusercontent.com/sburns1369/ProxyNode_MN_Script/master/DeLion_2pack.sh);;
+  3)bash <(curl -Ls https://raw.githubusercontent.com/sburns1369/ProxyNode_MN_Script/master/DeLion_3pack.sh);;
+  4)bash <(curl -Ls https://raw.githubusercontent.com/sburns1369/ProxyNode_MN_Script/master/DeLion_4pack.sh);;
+  5)bash <(curl -Ls https://raw.githubusercontent.com/sburns1369/ProxyNode_MN_Script/master/DeLion_5pack.sh);;
+  6)bash <(curl -Ls https://raw.githubusercontent.com/sburns1369/ProxyNode_MN_Script/master/DeLion_6pack.sh);;
+  7)bash <(curl -Ls https://raw.githubusercontent.com/sburns1369/ProxyNode_MN_Script/master/DeLion_7pack.sh);;
+  8)bash <(curl -Ls https://raw.githubusercontent.com/sburns1369/ProxyNode_MN_Script/master/DeLion_8pack.sh);;
+#  u)bash <(curl -Ls https://raw.githubusercontent.com/sburns1369/${COIN}_MN_Script/master/update_${COIN3l}.sh);;
   *)echo -e ${RED}"Invalid Option - Exiting Setup - Re-run to try again"${CLEAR};;
 esac
-else
-echo -e "Exiting Setup!  You can re-run to try again"
 fi

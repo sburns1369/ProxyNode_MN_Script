@@ -1,5 +1,5 @@
 #!/bin/bash
-#0.8a3-- NullEntryDev Script
+#0.9d-- NullEntryDev Script
 NODESL=One
 NODESN=1
 BLUE='\033[0;96m'
@@ -13,7 +13,7 @@ exit 1
 fi
 echo
 echo
-echo -e ${GREEN}"Are you sure you want to continue installation of a ${NODESL} ProxyNode Masternode?"
+echo -e ${GREEN}"Are you sure you want to continue the installation of a ProxyNode Masternode?"
 echo -e "type y/n followed by [ENTER]:"${CLEAR}
 read AGREE
 if [[ $AGREE =~ "y" ]] ; then
@@ -31,15 +31,16 @@ echo
 echo
 echo
 echo
-echo -e ${RED}"Your Masternode Private Keys are needed,"${CLEAR}
+echo -e ${RED}"Your Masternode Private Key is needed,"${CLEAR}
 echo -e ${GREEN}" -which can be generated from the local wallet"${CLEAR}
 echo
 echo -e ${YELLOW}"You can edit the config later if you don't have this"${CLEAR}
 echo -e ${YELLOW}"Masternode may fail to start with invalid key"${CLEAR}
+echo -e ${YELLOW}"And the script installation will hang and fail"${CLEAR}
 echo
 echo -e ${YELLOW}"Right Click to paste in some SSH Clients"${CLEAR}
 echo
-echo -e ${GREEN}"Please Enter Your First Masternode Private Key:"${CLEAR}
+echo -e ${GREEN}"Please Enter Your Masternode Private Key:"${CLEAR}
 read privkey
 echo
 echo "Creating ${NODESN} ProxyNode system users with no-login access:"
@@ -67,6 +68,7 @@ fi
 fi
 echo -e ${RED}"Updating Apps"${CLEAR}
 sudo apt-get -y update
+echo -e ${RED}"Upgrading Apps"${CLEAR}
 sudo apt-get -y upgrade
 if grep -Fxq "dependenciesInstalled: true" /usr/local/nullentrydev/mnodes.log
 then
@@ -95,6 +97,16 @@ if [[ $NULLREC = "y" ]] ; then
 echo "dependenciesInstalled: true" >> /usr/local/nullentrydev/mnodes.log
 fi
 fi
+echo -e ${YELLOW} "Building IP Tables"${CLEAR}
+sudo touch ip.tmp
+IP=$(hostname -I | cut -f2 -d' '| cut -f1-7 -d:)
+for i in {15361..15375}; do printf "${IP}:%.4x\n" $i >> ip.tmp; done
+MNIP1=$(sed -n '1p' < ip.tmp)
+if [[ $NULLREC = "y" ]] ; then
+sudo touch /usr/local/nullentrydev/iptable.log
+sudo cp ip.tmp >> /usr/local/nullentrydev/iptable.log
+fi
+rm -rf ip.tmp
 cd /var
 sudo touch swap.img
 sudo chmod 600 swap.img
@@ -111,9 +123,9 @@ wget https://github.com/ProxyNode/proxynode/releases/download/v1.0.0/Linux.zip
 unzip Linux.zip
 sleep 3
 sudo mv /root/prx/Linux/bin/prxd /root/prx/Linux/bin/prx-cli /usr/local/bin
-sudo chmod 755 -R /usr/local/bin/prx*
+sudo chmod 755 -R /usr/local/bin/proxynode*
 rm -rf /root/prx
-echo -e "${GREEN}Configuring First ProxyNode Node${CLEAR}"
+echo -e "${GREEN}Configuring ProxyNode Node${CLEAR}"
 sudo mkdir /home/proxynode/.proxynode
 sudo touch /home/proxynode/.proxynode/prx.conf
 echo "rpcuser=user"`shuf -i 100000-9999999 -n 1` >> /home/proxynode/.proxynode/prx.conf
@@ -127,64 +139,49 @@ echo "rpcport=12196" >> /home/proxynode/.proxynode/prx.conf
 echo "listen=0" >> /home/proxynode/.proxynode/prx.conf
 echo "externalip=$(hostname -I | cut -f1 -d' '):12195" >> /home/proxynode/.proxynode/prx.conf
 echo "masternodeprivkey=$privkey" >> /home/proxynode/.proxynode/prx.conf
-echo "addnode=128.199.229.219:12195" >> /home/proxynode/.proxynode/prx.conf
-echo "addnode=13.58.94.109:63650" >> /home/proxynode/.proxynode/prx.conf
-echo "addnode=138.197.190.15:12195" >> /home/proxynode/.proxynode/prx.conf
-echo "addnode=139.180.222.242:12195" >> /home/proxynode/.proxynode/prx.conf
-echo "addnode=142.44.246.71:12195" >> /home/proxynode/.proxynode/prx.conf
-echo "addnode=172.104.169.5:44244" >> /home/proxynode/.proxynode/prx.conf
-echo "addnode=172.104.34.114:12195" >> /home/proxynode/.proxynode/prx.conf
-echo "addnode=172.105.215.131:12195" >> /home/proxynode/.proxynode/prx.conf
-echo "addnode=149.56.109.85:48284" >> /home/proxynode/.proxynode/prx.conf
-echo "addnode=172.105.219.206:48008" >> /home/proxynode/.proxynode/prx.conf
-echo "addnode=173.212.242.63:33688" >> /home/proxynode/.proxynode/prx.conf
-echo "addnode=173.212.242.63:47470" >> /home/proxynode/.proxynode/prx.conf
-echo "addnode=176.9.238.181:57362" >> /home/proxynode/.proxynode/prx.conf
-echo "addnode=178.128.98.246:59052" >> /home/proxynode/.proxynode/prx.conf
-echo "addnode=178.159.42.138:39002" >> /home/proxynode/.proxynode/prx.conf
-echo "addnode=178.192.172.105:64396" >> /home/proxynode/.proxynode/prx.conf
-echo "addnode=178.32.121.122:48078" >> /home/proxynode/.proxynode/prx.conf
-echo "addnode=178.63.73.174:49710" >> /home/proxynode/.proxynode/prx.conf
-echo "addnode=192.99.59.104:12195" >> /home/proxynode/.proxynode/prx.conf
-echo "addnode=195.201.108.252:47834" >> /home/proxynode/.proxynode/prx.conf
-echo "addnode=198.13.45.106:39348" >> /home/proxynode/.proxynode/prx.conf
-echo "addnode=202.182.127.49:12195" >> /home/proxynode/.proxynode/prx.conf
-echo "addnode=208.167.245.143:12195" >> /home/proxynode/.proxynode/prx.conf
 if [[ $NULLREC = "y" ]] ; then
 echo "masterNode1 : true" >> /usr/local/nullentrydev/prx.log
 echo "walletVersion1 : 1.0.0" >> /usr/local/nullentrydev/prx.log
-echo "scriptVersion1 : 0.8a3" >> /usr/local/nullentrydev/prx.log
+echo "scriptVersion1 : 0.9d" >> /usr/local/nullentrydev/prx.log
 fi
 sleep 5
 echo
-echo -e ${YELLOW}"Launching First PRX Node"${CLEAR}
+echo -e ${YELLOW}"Launching PRX Node"${CLEAR}
 prxd -datadir=/home/proxynode/.proxynode -daemon
 echo
 echo -e ${YELLOW}"Looking for a Shared Masternode Service? Check out Crypto Hash Tank" ${CLEAR}
 echo -e ${YELLOW}"Support my Project, and put your loose change to work for you!" ${CLEAR}
 echo -e ${YELLOW}" https://www.cryptohashtank.com/TJIF "${CLEAR}
-sleep 45
 echo
-echo -e ${BOLD}"All ${NODESN} PRX Nodes Launched, please wait for it to synchronize".${CLEAR}
+echo -e ${YELLOW}"Special Thanks to the BitcoinGenX (BGX) Community" ${CLEAR}
+sleep 20
+echo -e "${RED}This process can take a while!${CLEAR}"
+echo -e "${YELLOW}Waiting on Masternode Block Chain to Synchronize${CLEAR}"
+until prx-cli -datadir=/home/proxynode/.proxynode mnsync status | grep -m 1 'IsBlockchainSynced" : true'; do
+prx-cli -datadir=/home/proxynode/.proxynode getblockcount
+sleep 60
+done
+
 echo
-echo -e "${BOLD}Your Masternodes are synchronize this will take some time."${CLEAR}
-echo -e "While you wait you can configure your masternode.conf in your local wallet"${CLEAR}
-echo -e "The data below needs to be in your local masternode configuration file:${CLEAR}"
-echo -e "${BOLD} Masternode - \#1 IP: $(hostname -I | cut -f1 -d' '):12195${CLEAR}"
-echo -e "${BOLD} Masternode - \#2 IP: [$(hostname -I | cut -f2 -d' ')]:12195${CLEAR}"
+echo -e ${BOLD}"Your PRX Node has Launched."${CLEAR}
 echo
-echo -e ${BOLD} "If you become disconnected, you can check the status of sync ing with"${CLEAR}
-echo -e "${YELLOW}For prx-cli -datadir=/home/proxynode/.proxynode mnsync status"${CLEAR}
+
+echo -e "${GREEN}You can check the status of your PRX Masternode with"${CLEAR}
+echo -e "${YELLOW} prx-cli -datadir=/home/proxynode/.proxynode masternode status"${CLEAR}
+echo -e "${YELLOW}For mn1: \"prx-cli -datadir=/home/proxynode/.proxynode masternode status\""${CLEAR}
 echo
-echo -e "${BOLD}You can check the status of your PRX Masternode with"${CLEAR}
-echo -e "${YELLOW}For prx-cli -datadir=/home/proxynode/.proxynode masternode status"${CLEAR}
-echo
+echo -e "${RED}Status 29 may take a few minutes to clear while the daemon processes the chainstate"${CLEAR}
+echo -e "${GREEN}The data below needs to be in your local masternode configuration file:${CLEAR}"
+echo -e "${BOLD} Masternode - IP: $(hostname -I | cut -f1 -d' '):12195${CLEAR}"
 fi
-echo -e ${BLUE}" Your patronage is apprappreciated, tipping addresses"${CLEAR}
+echo -e ${BLUE}" Your patronage is appreciated, tipping addresses"${CLEAR}
 echo -e ${BLUE}" ProxyNode address: PRa4W66rUB8VN3wiynBwC7YYFc8fC6ywxQ"${CLEAR}
+echo -e ${BLUE}" XGS address: BayScFpFgPBiDU1XxdvozJYVzM2BQvNFgM"${CLEAR}
 echo -e ${BLUE}" LTC address: MUdDdVr4Az1dVw47uC4srJ31Ksi5SNkC7H"${CLEAR}
-echo -e ${BLUE}" BTC address: 32FzghE1yUZRdDmCkj3bJ6vJyXxUVPKY93"${CLEAR}
 echo
-echo -e ${YELLOW}"Need help? Find Sburns1369\#1584 one Discord - https://discord.gg/YhJ8v3g"${CLEAR}
+echo -e ${YELLOW}"Need help? Find Sburns1369\#1584 on Discord - https://discord.gg/YhJ8v3g"${CLEAR}
+echo -e ${YELLOW}"If Direct Messaged please verify by clicking on the profile!"${CLEAR}
+echo -e ${YELLOW}"it says Sburns1369 in bigger letters followed by a little #1584" ${CLEAR}
+echo -e ${YELLOW}"Anyone can clone my name, but not the #1384".${CLEAR}
 echo
 echo -e ${RED}"The END."${CLEAR};
