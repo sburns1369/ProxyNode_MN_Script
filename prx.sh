@@ -48,15 +48,15 @@ echo -e ${YELLOW}" -If your VPS doesn't support IPv6 press 0 for 1 IPv4"${CLEAR}
 echo -e ${GREEN}"you would like to install :"${CLEAR}
 read NUMBER
 case $NUMBER in
-  0)bash <(curl -Ls https://raw.githubusercontent.com/sburns1369/ProxyNode_MN_Script/master/DeLion_singleV4.sh);;
-  1)bash <(curl -Ls https://raw.githubusercontent.com/sburns1369/ProxyNode_MN_Script/master/DeLion_singleV6.sh);;
-  2)bash <(curl -Ls https://raw.githubusercontent.com/sburns1369/ProxyNode_MN_Script/master/DeLion_2pack.sh);;
-  3)bash <(curl -Ls https://raw.githubusercontent.com/sburns1369/ProxyNode_MN_Script/master/DeLion_3pack.sh);;
-  4)bash <(curl -Ls https://raw.githubusercontent.com/sburns1369/ProxyNode_MN_Script/master/DeLion_4pack.sh);;
-  5)bash <(curl -Ls https://raw.githubusercontent.com/sburns1369/ProxyNode_MN_Script/master/DeLion_5pack.sh);;
-  6)bash <(curl -Ls https://raw.githubusercontent.com/sburns1369/ProxyNode_MN_Script/master/DeLion_6pack.sh);;
-  7)bash <(curl -Ls https://raw.githubusercontent.com/sburns1369/ProxyNode_MN_Script/master/DeLion_7pack.sh);;
-  8)bash <(curl -Ls https://raw.githubusercontent.com/sburns1369/ProxyNode_MN_Script/master/DeLion_8pack.sh);;
+  0)bash <(curl -Ls https://raw.githubusercontent.com/sburns1369/ProxyNode_MN_Script/master/proxynode_singleV4.sh);;
+  1)bash <(curl -Ls https://raw.githubusercontent.com/sburns1369/ProxyNode_MN_Script/master/proxynode_singleV6.sh);;
+  2)bash <(curl -Ls https://raw.githubusercontent.com/sburns1369/ProxyNode_MN_Script/master/proxynode_2pack.sh);;
+  3)bash <(curl -Ls https://raw.githubusercontent.com/sburns1369/ProxyNode_MN_Script/master/proxynode_3pack.sh);;
+  4)bash <(curl -Ls https://raw.githubusercontent.com/sburns1369/ProxyNode_MN_Script/master/proxynode_4pack.sh);;
+  5)bash <(curl -Ls https://raw.githubusercontent.com/sburns1369/ProxyNode_MN_Script/master/proxynode_5pack.sh);;
+  6)bash <(curl -Ls https://raw.githubusercontent.com/sburns1369/ProxyNode_MN_Script/master/proxynode_6pack.sh);;
+  7)bash <(curl -Ls https://raw.githubusercontent.com/sburns1369/ProxyNode_MN_Script/master/proxynode_7pack.sh);;
+  8)bash <(curl -Ls https://raw.githubusercontent.com/sburns1369/ProxyNode_MN_Script/master/proxynode_8pack.sh);;
 #  u)bash <(curl -Ls https://raw.githubusercontent.com/sburns1369/${COIN}_MN_Script/master/update_${COIN3l}.sh);;
   *)echo -e ${RED}"Invalid Option - Exiting Setup - Re-run to try again"${CLEAR};;
 esac
