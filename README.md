@@ -1,5 +1,9 @@
 # ProxyNode_MN_Script
- IPv4 or up to 8 IPv6 Masternodes selectable script.
+
+### Please Donate to PRX Address : PSBJtuHfGq3mC31pAHQsKQWL9NbbCtt5Eu 
+### Half of the Donations will go towards a Re-Development Fund for PRX
+
+IPv4 or up to 8 IPv6 Masternodes selectable script.
 
 Basic instructions in Scripts, once ran. Forward Questions to Discord Channel in Script.
 
