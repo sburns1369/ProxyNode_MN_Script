@@ -155,9 +155,9 @@ fi
 cd /root/prx
 echo "Downloading latest ProxyNode binaries"
 wget https://github.com/ProxyNode/proxynode/releases/download/v1.0.0/Linux.zip
-unzip /Linux/bin/Linux.zip
+unzip Linux.zip
 sleep 3
-sudo mv /root/prx/prxd /root/prx/prx-cli /usr/local/bin
+sudo mv /root/prx/Linux/bin/prxd /root/prx/Linux/bin/prx-cli /usr/local/bin
 sudo chmod 755 -R /usr/local/bin/prx*
 rm -rf /root/prx
 echo -e "${GREEN}Configuring First ProxyNode Node${CLEAR}"
