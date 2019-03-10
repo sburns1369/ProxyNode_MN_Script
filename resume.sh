@@ -1,3 +1,12 @@
+#!/bin/bash
+#0.9d-- NullEntryDev Script
+NODESL=Eight
+NODESN=8
+BLUE='\033[0;96m'
+GREEN='\033[0;92m'
+RED='\033[0;91m'
+YELLOW='\033[0;93m'
+CLEAR='\033[0m'
 prx-cli -datadir=/home/proxynode/.proxynode stop
 sleep 5
 cd /home/proxynode/.proxynode
