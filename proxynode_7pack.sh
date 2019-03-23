@@ -1,5 +1,5 @@
 #!/bin/bash
-#0.9d-- NullEntryDev Script
+#0.99-- NullEntryDev Script
 NODESL=Seven
 NODESN=7
 BLUE='\033[0;96m'
@@ -27,11 +27,65 @@ echo -e ${BLUE}"Zero Confidental information or Wallet keys will be stored in it
 echo -e ${YELLOW}"Press y to agree followed by [ENTER], or just [ENTER] to disagree"${CLEAR}
 read NULLREC
 echo
+echo -e ${GREEN}"Would you like to enter custom IP addresses?"${CLEAR}
+echo -e ${YELLOW}"If you don't know the answer, hit n for no"${CLEAR}
+echo -e ${YELLOW}"If you have custom IPs hit y for yes"${CLEAR}
+read customIP
+echo "Creating ${NODESN} ProxyNode system user(s) with no-login access:"
+if id "proxynode" >/dev/null 2>&1; then
+echo "user exists"
+MN1=1
+else
+sudo adduser --system --home /home/proxynode proxynode
+MN1=0
+fi
+if id "proxynode2" >/dev/null 2>&1; then
+echo -e ${YELLOW} "Found user proxynode2!"${CLEAR}
+MN2=1
+else
+sudo adduser --system --home /home/proxynode2 proxynode2
+MN2=0
+fi
+if id "proxynode3" >/dev/null 2>&1; then
+echo -e ${YELLOW} "Found user proxynode3!"${CLEAR}
+MN3=1
+else
+sudo adduser --system --home /home/proxynode3 proxynode3
+MN3=0
+fi
+if id "proxynode4" >/dev/null 2>&1; then
+echo -e ${YELLOW} "Found user proxynode4!"${CLEAR}
+MN4=1
+else
+sudo adduser --system --home /home/proxynode4 proxynode4
+MN4=0
+fi
+if id "proxynode5" >/dev/null 2>&1; then
+echo -e ${YELLOW} "Found user proxynode5!"${CLEAR}
+MN5=1
+else
+sudo adduser --system --home /home/proxynode5 proxynode5
+MN5=0
+fi
+if id "proxynode6" >/dev/null 2>&1; then
+echo -e ${YELLOW} "Found user proxynode6!"${CLEAR}
+MN6=1
+else
+sudo adduser --system --home /home/proxynode6 proxynode6
+MN6=0
+fi
+if id "proxynode7" >/dev/null 2>&1; then
+echo -e ${YELLOW} "Found user proxynode7!"${CLEAR}
+MN7=1
+else
+sudo adduser --system --home /home/proxynode7 proxynode7
+MN7=0
+fi
 echo
 echo
 echo
 echo
-echo -e ${RED}"Your Masternode Private Keys are needed,"${CLEAR}
+echo -e ${RED}"Your New Masternode Private Keys are needed,"${CLEAR}
 echo -e ${GREEN}" -which can be generated from the local wallet"${CLEAR}
 echo
 echo -e ${YELLOW}"You can edit the config later if you don't have this"${CLEAR}
@@ -40,35 +94,55 @@ echo -e ${YELLOW}"And the script installation will hang and fail"${CLEAR}
 echo
 echo -e ${YELLOW}"Right Click to paste in some SSH Clients"${CLEAR}
 echo
+if [[ "$MN1" -eq "0" ]]; then
 echo -e ${GREEN}"Please Enter Your First Masternode Private Key:"${CLEAR}
-read privkey
+read MNKEY
 echo
+else
+echo -e ${YELLOW}"Skipping First Masternode Key"${CLEAR}
+fi
+if [[ "$MN2" -eq "0" ]]; then
 echo -e ${GREEN}"Please Enter Your Second Masternode Private Key:"${CLEAR}
-read privkey2
+read MNKEY2
 echo
+else
+echo -e ${YELLOW}"Skipping Second Masternode Key"${CLEAR}
+fi
+if [[ "$MN3" -eq "0" ]]; then
 echo -e ${GREEN}"Please Enter Your Third Masternode Private Key:"${CLEAR}
-read privkey3
+read MNKEY3
 echo
+else
+echo -e ${YELLOW}"Skipping Third Masternode Key"${CLEAR}
+fi
+if [[ "$MN4" -eq "0" ]]; then
 echo -e ${GREEN}"Please Enter Your Fourth Masternode Private Key:"${CLEAR}
-read privkey4
+read MNKEY4
 echo
+else
+echo -e ${YELLOW}"Skipping Fourth Masternode Key"${CLEAR}
+fi
+if [[ "$MN5" -eq "0" ]]; then
 echo -e ${GREEN}"Please Enter Your Fifth Masternode Private Key:"${CLEAR}
-read privkey5
+read MNKEY5
 echo
+else
+echo -e ${YELLOW}"Skipping Fifth Masternode Key"${CLEAR}
+fi
+if [[ "$MN6" -eq "0" ]]; then
 echo -e ${GREEN}"Please Enter Your Sixth Masternode Private Key:"${CLEAR}
-read privkey6
+read MNKEY6
 echo
+else
+echo -e ${YELLOW}"Skipping Sixth Masternode Key"${CLEAR}
+fi
+if [[ "$MN7" -eq "0" ]]; then
 echo -e ${GREEN}"Please Enter Your Seventh Masternode Private Key:"${CLEAR}
-read privkey7
+read MNKEY7
 echo
-echo "Creating ${NODESN} ProxyNode system users with no-login access:"
-sudo adduser --system --home /home/proxynode proxynode
-sudo adduser --system --home /home/proxynode2 proxynode2
-sudo adduser --system --home /home/proxynode3 proxynode3
-sudo adduser --system --home /home/proxynode4 proxynode4
-sudo adduser --system --home /home/proxynode5 proxynode5
-sudo adduser --system --home /home/proxynode6 proxynode6
-sudo adduser --system --home /home/proxynode7 proxynode7
+else
+echo -e ${YELLOW}"Skipping Seventh Masternode Key"${CLEAR}
+fi
 cd ~
 if [[ $NULLREC = "y" ]] ; then
 if [ ! -d /usr/local/nullentrydev/ ]; then
@@ -121,9 +195,52 @@ if [[ $NULLREC = "y" ]] ; then
 echo "dependenciesInstalled: true" >> /usr/local/nullentrydev/mnodes.log
 fi
 fi
+if [[ customIP = "y" ]] ; then
+echo -e ${GREEN}"IP for Masternode 1"${CLEAR}
+read MNIP1
+echo -e ${GREEN}"IP for Masternode 2"${CLEAR}
+read MNIP2
+echo -e ${GREEN}"IP for Masternode 3"${CLEAR}
+read MNIP3
+echo -e ${GREEN}"IP for Masternode 4"${CLEAR}
+read MNIP4
+echo -e ${GREEN}"IP for Masternode 5"${CLEAR}
+read MNIP5
+echo -e ${GREEN}"IP for Masternode 6"${CLEAR}
+read MNIP6
+echo -e ${GREEN}"IP for Masternode 7"${CLEAR}
+read MNIP7
+else
+regex='^([0-9a-fA-F]{0,4}:){1,7}[0-9a-fA-F]{0,4}$'
+FINDIP=$(hostname -I | cut -f2 -d' '| cut -f1-7 -d:)
+if [[ $FINDIP =~ $regex ]]; then
+echo "IPv6 Address check is good"
+echo ${FINDIP} testing note
+IP=${FINDIP}
+echo ${IP}
+else
+echo "IPv6 Address check is not expected, getting IPv6 Helper to recalculate"
+echo $FINDIP - testing note 1
+sudo apt-get install sipcalc
+echo $FINDIP - testing note 2
+FINDIP=$(hostname -I | cut -f3 -d' '| cut -f1-8 -d:)
+echo $FINDIP - check 3
+echo "Attempting to adjust results and re-calculate IPv6 Address"
+FINDIP=$(sipcalc ${FINDIP} | fgrep Expanded | cut -d ' ' -f3)
+if [[ $FINDIP =~ $regex ]]; then
+FINDIP=$(echo ${FINDIP} | cut -f1-7 -d:)
+echo "IPv6 Address check is good"
+IP=${FINDIP}
+else
+echo "IPv6 Addressing check has failed. Contact NullEntry Support"
+echo ${IP} testing note
+exit 1
+fi
+fi
+echo ${MNIP1} testing note
+echo ${IP} testing note
 echo -e ${YELLOW} "Building IP Tables"${CLEAR}
 sudo touch ip.tmp
-IP=$(hostname -I | cut -f2 -d' '| cut -f1-7 -d:)
 for i in {15361..15375}; do printf "${IP}:%.4x\n" $i >> ip.tmp; done
 MNIP1=$(sed -n '1p' < ip.tmp)
 MNIP2=$(sed -n '2p' < ip.tmp)
@@ -132,18 +249,80 @@ MNIP4=$(sed -n '4p' < ip.tmp)
 MNIP5=$(sed -n '5p' < ip.tmp)
 MNIP6=$(sed -n '6p' < ip.tmp)
 MNIP7=$(sed -n '7p' < ip.tmp)
-if [[ $NULLREC = "y" ]] ; then
-sudo touch /usr/local/nullentrydev/iptable.log
-sudo cp ip.tmp >> /usr/local/nullentrydev/iptable.log
-fi
 rm -rf ip.tmp
+fi
+if grep -Fxq "swapInstalled: true" /usr/local/nullentrydev/mnodes.log
+then
+echo -e ${RED}"Skipping... Swap Area already made"${CLEAR}
+else
 cd /var
 sudo touch swap.img
 sudo chmod 600 swap.img
 sudo dd if=/dev/zero of=/var/swap.img bs=1024k count=4096
 sudo mkswap /var/swap.img
 sudo swapon /var/swap.img
+if [[ $NULLREC = "y" ]] ; then
+echo "swapInstalled: true" >> /usr/local/nullentrydev/mnodes.log
+fi
+fi
 cd ~
+touch prxcheck.tmp
+ps aux | grep proxynode >> prxcheck.tmp
+if grep home/proxynode/.prx prxcheck.tmp
+then
+echo Found OLD ${NC} prx Node running
+OldNode="1"
+else
+echo No ${NC} prx Node not running
+OldNode="0"
+fi
+until [[ $NC = 9 ]]; do
+if grep /home/proxynode${NC}/.prx prxcheck.tmp
+then
+echo Found ${NC} prx Node running
+declare IPN$NC="1"
+RB=1
+else
+echo No ${NC} prx Node not running
+declare IPN$NC="0"
+echo $NC
+fi
+NC=$[$NC+1]
+done
+rm -r prxcheck.tmp
+if [[ "$OldNode" = "1" ]]; then
+prx-cli -datadir=/home/proxynode/.proxynode stop
+fi
+if [[ "$IPN1" = "1" ]]; then
+prx-cli -datadir=/home/proxynode1/.proxynode stop
+fi
+if [[ "$IPN2" = "1" ]]; then
+prx-cli -datadir=/home/proxynode2/.proxynode stop
+fi
+if [[ "$IPN3" = "1" ]]; then
+prx-cli -datadir=/home/proxynode3/.proxynode stop
+fi
+if [[ "$IPN4" = "1" ]]; then
+prx-cli -datadir=/home/proxynode4/.proxynode stop
+fi
+if [[ "$IPN5" = "1" ]]; then
+prx-cli -datadir=/home/proxynode5/.proxynode stop
+fi
+if [[ "$IPN6" = "1" ]]; then
+prx-cli -datadir=/home/proxynode6/.proxynode stop
+fi
+if [[ "$IPN7" = "1" ]]; then
+prx-cli -datadir=/home/proxynode7/.proxynode stop
+fi
+if [[ "$IPN8" = "1" ]]; then
+prx-cli -datadir=/home/proxynode8/.proxynode stop
+fi
+if [[ "$IPN9" = "1" ]]; then
+prx-cli -datadir=/home/proxynode9/.proxynode stop
+fi
+if [[ "$IPN0" = "1" ]]; then
+prx-cli -datadir=/home/proxynode0/.proxynode stop
+fi
 if [ ! -d /root/prx ]; then
 sudo mkdir /root/prx
 fi
@@ -155,6 +334,7 @@ sleep 3
 sudo mv /root/prx/Linux/bin/prxd /root/prx/Linux/bin/prx-cli /usr/local/bin
 sudo chmod 755 -R /usr/local/bin/prx*
 rm -rf /root/prx
+if [ ! -f /home/proxynode/.proxynode/prx.conf ]; then
 echo -e "${GREEN}Configuring First ProxyNode Node${CLEAR}"
 sudo mkdir /home/proxynode/.proxynode
 sudo touch /home/proxynode/.proxynode/prx.conf
@@ -165,18 +345,28 @@ echo "server=1" >> /home/proxynode/.proxynode/prx.conf
 echo "daemon=1" >> /home/proxynode/.proxynode/prx.conf
 echo "maxconnections=250" >> /home/proxynode/.proxynode/prx.conf
 echo "masternode=1" >> /home/proxynode/.proxynode/prx.conf
-echo "rpcport=12196" >> /home/proxynode/.proxynode/prx.conf
+echo "rpcport=12195" >> /home/proxynode/.proxynode/prx.conf
 echo "listen=0" >> /home/proxynode/.proxynode/prx.conf
 echo "externalip=[${MNIP1}]:12195" >> /home/proxynode/.proxynode/prx.conf
-echo "masternodeprivkey=$privkey" >> /home/proxynode/.proxynode/prx.conf
+echo "masternodeprivkey=$MNKEY" >> /home/proxynode/.proxynode/prx.conf
+echo "addnode=23.94.102.195" >> /home/proxynode/.proxynode/prx.conf
+echo "addnode=108.61.75.117" >> /home/proxynode/.proxynode/prx.conf
+echo "addnode=178.32.121.122" >> /home/proxynode/.proxynode/prx.conf
+echo "addnode=207.148.85.235" >> /home/proxynode/.proxynode/prx.conf
+echo "addnode=192.99.59.104" >> /home/proxynode/.proxynode/prx.conf
+echo "addnode=45.32.14.151" >> /home/proxynode/.proxynode/prx.conf
+MN1=0
 if [[ $NULLREC = "y" ]] ; then
 echo "masterNode1 : true" >> /usr/local/nullentrydev/prx.log
 echo "walletVersion1 : 1.0.0" >> /usr/local/nullentrydev/prx.log
-echo "scriptVersion1 : 0.9d" >> /usr/local/nullentrydev/prx.log
+echo "scriptVersion1 : 0.99" >> /usr/local/nullentrydev/prx.log
 fi
-sleep 5
+else
+echo -e ${YELLOW}"Found /home/proxynode/.proxynode/prx.conf"${CLEAR}
+echo -e ${YELLOW}"Skipping Configuration there"${CLEAR}
+fi
 echo
-echo -e ${YELLOW}"Launching first PRX Node"${CLEAR}
+echo -e ${YELLOW}"Launching First PRX Node"${CLEAR}
 prxd -datadir=/home/proxynode/.proxynode -daemon
 echo
 echo -e ${YELLOW}"Looking for a Shared Masternode Service? Check out Crypto Hash Tank" ${CLEAR}
@@ -185,7 +375,10 @@ echo -e ${YELLOW}" https://www.cryptohashtank.com/TJIF "${CLEAR}
 echo
 echo -e ${YELLOW}"Special Thanks to the BitcoinGenX (BGX) Community" ${CLEAR}
 sleep 20
-echo -e "${GREEN}Configuring second ProxyNode Node${CLEAR}"
+if [ ! -f /home/proxynode2/.proxynode/prx.conf ]; then
+if [ ! -f /home/proxynode2/prx.conf ]; then
+echo -e "${YELLOW}Second ProxyNode Normal Warning - Node Configuration Not Found....${CLEAR}"
+echo -e "${GREEN}Configuring Second ProxyNode Node${CLEAR}"
 sudo mkdir /home/proxynode2/.proxynode
 sudo touch /home/proxynode2/prx.conf
 echo "rpcuser=user"`shuf -i 100000-9999999 -n 1` >> /home/proxynode2/prx.conf
@@ -195,18 +388,31 @@ echo "server=1" >> /home/proxynode2/prx.conf
 echo "daemon=1" >> /home/proxynode2/prx.conf
 echo "maxconnections=250" >> /home/proxynode2/prx.conf
 echo "masternode=1" >> /home/proxynode2/prx.conf
-echo "rpcport=12197" >> /home/proxynode2/prx.conf
+echo "rpcport=12196" >> /home/proxynode2/prx.conf
 echo "listen=0" >> /home/proxynode2/prx.conf
 echo "externalip=[${MNIP2}]:12195" >> /home/proxynode2/prx.conf
-echo "masternodeprivkey=$privkey2" >> /home/proxynode2/prx.conf
+echo "masternodeprivkey=$MNKEY2" >> /home/proxynode2/prx.conf
+echo "addnode=[${MNIP1}]" >> /home/proxynode/.proxynode/prx.conf
 if [[ $NULLREC = "y" ]] ; then
 echo "masterNode2 : true" >> /usr/local/nullentrydev/prx.log
 echo "walletVersion2 : 1.0.0" >> /usr/local/nullentrydev/prx.log
-echo "scriptVersion2 : 0.9d" >> /usr/local/nullentrydev/prx.log
+echo "scriptVersion2 : 0.99" >> /usr/local/nullentrydev/prx.log
 fi
-sleep 5
+else
 echo
-echo -e "${GREEN}Configuring third ProxyNode Node${CLEAR}"
+echo -e ${GREEN}"Found /home/proxynode2/prx.conf"${CLEAR}
+echo -e ${YELLOW}"Skipping Pre-stage for Second Node "${CLEAR}
+MN2=0
+fi
+else
+echo -e ${YELLOW}"Found /home/proxynode2/.proxynode/prx.conf"${CLEAR}
+echo -e ${YELLOW}"Skipping Configuration for Second Node"${CLEAR}
+fi
+echo
+if [ ! -f /home/proxynode3/.proxynode/prx.conf ]; then
+if [ ! -f /home/proxynode3/prx.conf ]; then
+echo -e "${GREEN}Third ProxyNode Node Configuration Not Found....${CLEAR}"
+echo -e "${GREEN}Configuring Third ProxyNode Node${CLEAR}"
 sudo mkdir /home/proxynode3/.proxynode
 sudo touch /home/proxynode3/prx.conf
 echo "rpcuser=user"`shuf -i 100000-9999999 -n 1` >> /home/proxynode3/prx.conf
@@ -216,18 +422,30 @@ echo "server=1" >> /home/proxynode3/prx.conf
 echo "daemon=1" >> /home/proxynode3/prx.conf
 echo "maxconnections=250" >> /home/proxynode3/prx.conf
 echo "masternode=1" >> /home/proxynode3/prx.conf
-echo "rpcport=12199" >> /home/proxynode3/prx.conf
+echo "rpcport=12198" >> /home/proxynode3/prx.conf
 echo "listen=0" >> /home/proxynode3/prx.conf
 echo "externalip=[${MNIP3}]:12195" >> /home/proxynode3/prx.conf
-echo "masternodeprivkey=$privkey3" >> /home/proxynode3/prx.conf
+echo "masternodeprivkey=$MNKEY3" >> /home/proxynode3/prx.conf
 if [[ $NULLREC = "y" ]] ; then
 echo "masterNode3 : true" >> /usr/local/nullentrydev/prx.log
 echo "walletVersion3 : 1.0.0" >> /usr/local/nullentrydev/prx.log
-echo "scriptVersion3 : 0.9d" >> /usr/local/nullentrydev/prx.log
+echo "scriptVersion3 : 0.99" >> /usr/local/nullentrydev/prx.log
 fi
-sleep 5
+else
+echo -e ${YELLOW}"Found /home/proxynode3/prx.conf"${CLEAR}
+echo -e ${YELLOW}"Skipping Pre-stage for Third Node "${CLEAR}
+MN3=0
+fi
 echo
-echo -e "${GREEN}Configuring fourth ProxyNode Node${CLEAR}"
+else
+echo -e ${YELLOW}"Found /home/proxynode3/.proxynode/prx.conf"${CLEAR}
+echo -e ${YELLOW}"Skipping Configuration for Third Node"${CLEAR}
+fi
+echo
+if [ ! -f /home/proxynode4/.proxynode/prx.conf ]; then
+if [ ! -f /home/proxynode4/prx.conf ]; then
+echo -e "${GREEN}Fourth ProxyNode Node Configuration Not Found....${CLEAR}"
+echo -e "${GREEN}Configuring Fourth ProxyNode Node${CLEAR}"
 sudo mkdir /home/proxynode4/.proxynode
 sudo touch /home/proxynode4/prx.conf
 echo "rpcuser=user"`shuf -i 100000-9999999 -n 1` >> /home/proxynode4/prx.conf
@@ -237,18 +455,29 @@ echo "server=1" >> /home/proxynode4/prx.conf
 echo "daemon=1" >> /home/proxynode4/prx.conf
 echo "maxconnections=250" >> /home/proxynode4/prx.conf
 echo "masternode=1" >> /home/proxynode4/prx.conf
-echo "rpcport=12200" >> /home/proxynode4/prx.conf
+echo "rpcport=12199" >> /home/proxynode4/prx.conf
 echo "listen=0" >> /home/proxynode4/prx.conf
 echo "externalip=[${MNIP4}]:12195" >> /home/proxynode4/prx.conf
-echo "masternodeprivkey=$privkey4" >> /home/proxynode4/prx.conf
+echo "masternodeprivkey=$MNKEY4" >> /home/proxynode4/prx.conf
 if [[ $NULLREC = "y" ]] ; then
 echo "masterNode4 : true" >> /usr/local/nullentrydev/prx.log
 echo "walletVersion4 : 1.0.0" >> /usr/local/nullentrydev/prx.log
-echo "scriptVersion4 : 0.9d" >> /usr/local/nullentrydev/prx.log
+echo "scriptVersion4 : 0.99" >> /usr/local/nullentrydev/prx.log
 fi
-sleep 5
+else
 echo
-echo -e "${GREEN}Configuring fifth ProxyNode Node${CLEAR}"
+echo -e ${YELLOW}"Found /home/proxynode4/prx.conf"${CLEAR}
+echo -e ${YELLOW}"Skipping Pre-stage for Fourth Node "${CLEAR}
+MN4=0
+fi
+else
+echo -e ${YELLOW}"Found /home/proxynode4/.proxynode/prx.conf"${CLEAR}
+echo -e ${YELLOW}"Skipping Configuration for Fourth Node"${CLEAR}
+fi
+if [ ! -f /home/proxynode5/.proxynode/prx.conf ]; then
+if [ ! -f /home/proxynode5/prx.conf ]; then
+echo -e "${GREEN}Fifth ProxyNode Node Configuration Not Found....${CLEAR}"
+echo -e "${GREEN}Configuring Fifth ProxyNode Node${CLEAR}"
 sudo mkdir /home/proxynode5/.proxynode
 sudo touch /home/proxynode5/prx.conf
 echo "rpcuser=user"`shuf -i 100000-9999999 -n 1` >> /home/proxynode5/prx.conf
@@ -258,18 +487,29 @@ echo "server=1" >> /home/proxynode5/prx.conf
 echo "daemon=1" >> /home/proxynode5/prx.conf
 echo "maxconnections=250" >> /home/proxynode5/prx.conf
 echo "masternode=1" >> /home/proxynode5/prx.conf
-echo "rpcport=12201" >> /home/proxynode5/prx.conf
+echo "rpcport=12200" >> /home/proxynode5/prx.conf
 echo "listen=0" >> /home/proxynode5/prx.conf
 echo "externalip=[${MNIP5}]:12195" >> /home/proxynode5/prx.conf
-echo "masternodeprivkey=$privkey5" >> /home/proxynode5/prx.conf
+echo "masternodeprivkey=$MNKEY5" >> /home/proxynode5/prx.conf
 if [[ $NULLREC = "y" ]] ; then
 echo "masterNode5 : true" >> /usr/local/nullentrydev/prx.log
 echo "walletVersion5 : 1.0.0" >> /usr/local/nullentrydev/prx.log
-echo "scriptVersion5 : 0.9d" >> /usr/local/nullentrydev/prx.log
+echo "scriptVersion5 : 0.99" >> /usr/local/nullentrydev/prx.log
 fi
-sleep 5
+else
 echo
-echo -e "${GREEN}Configuring sixth ProxyNode Node${CLEAR}"
+echo -e ${YELLOW}"Found /home/proxynode5/prx.conf"${CLEAR}
+echo -e ${YELLOW}"Skipping Pre-stage for Fifth Node "${CLEAR}
+MN5=0
+fi
+else
+echo -e ${YELLOW}"Found /home/proxynode5/.proxynode/prx.conf"${CLEAR}
+echo -e ${YELLOW}"Skipping Configuration for Fifth Node"${CLEAR}
+fi
+if [ ! -f /home/proxynode6/.proxynode/prx.conf ]; then
+if [ ! -f /home/proxynode6/prx.conf ]; then
+echo -e "${GREEN}Sixth ProxyNode Node Configuration Not Found....${CLEAR}"
+echo -e "${YELLOW}Configuring Sixth ProxyNode Node${CLEAR}"
 sudo mkdir /home/proxynode6/.proxynode
 sudo touch /home/proxynode6/prx.conf
 echo "rpcuser=user"`shuf -i 100000-9999999 -n 1` >> /home/proxynode6/prx.conf
@@ -279,18 +519,30 @@ echo "server=1" >> /home/proxynode6/prx.conf
 echo "daemon=1" >> /home/proxynode6/prx.conf
 echo "maxconnections=250" >> /home/proxynode6/prx.conf
 echo "masternode=1" >> /home/proxynode6/prx.conf
-echo "rpcport=12202" >> /home/proxynode6/prx.conf
+echo "rpcport=12201" >> /home/proxynode6/prx.conf
 echo "listen=0" >> /home/proxynode6/prx.conf
 echo "externalip=[${MNIP6}]:12195" >> /home/proxynode6/prx.conf
-echo "masternodeprivkey=$privkey6" >> /home/proxynode6/prx.conf
+echo "masternodeprivkey=$MNKEY6" >> /home/proxynode6/prx.conf
 if [[ $NULLREC = "y" ]] ; then
 echo "masterNode6 : true" >> /usr/local/nullentrydev/prx.log
 echo "walletVersion6 : 1.0.0" >> /usr/local/nullentrydev/prx.log
-echo "scriptVersion6 : 0.9d" >> /usr/local/nullentrydev/prx.log
+echo "scriptVersion6 : 0.99" >> /usr/local/nullentrydev/prx.log
 fi
-sleep 5
+else
 echo
-echo -e "${GREEN}Configuring seventh ProxyNode Node${CLEAR}"
+echo -e ${YELLOW}"Found /home/proxynode6/prx.conf"${CLEAR}
+echo -e ${YELLOW}"Skipping Pre-stage for Sixth Node "${CLEAR}
+MN6=0
+fi
+else
+echo -e ${YELLOW}"Found /home/proxynode6/.proxynode/prx.conf"${CLEAR}
+echo -e ${YELLOW}"Skipping Configuration for Sixth Node"${CLEAR}
+fi
+echo
+if [ ! -f /home/proxynode7/.proxynode/prx.conf ]; then
+if [ ! -f /home/proxynode7/prx.conf ]; then
+echo -e "${GREEN}Seventh ProxyNode Node Configuration Not Found....${CLEAR}"
+echo -e "${YELLOW}Configuring Seventh ProxyNode Node${CLEAR}"
 sudo mkdir /home/proxynode7/.proxynode
 sudo touch /home/proxynode7/prx.conf
 echo "rpcuser=user"`shuf -i 100000-9999999 -n 1` >> /home/proxynode7/prx.conf
@@ -300,16 +552,25 @@ echo "server=1" >> /home/proxynode7/prx.conf
 echo "daemon=1" >> /home/proxynode7/prx.conf
 echo "maxconnections=250" >> /home/proxynode7/prx.conf
 echo "masternode=1" >> /home/proxynode7/prx.conf
-echo "rpcport=12203" >> /home/proxynode7/prx.conf
+echo "rpcport=12202" >> /home/proxynode7/prx.conf
 echo "listen=0" >> /home/proxynode7/prx.conf
 echo "externalip=[${MNIP7}]:12195" >> /home/proxynode7/prx.conf
-echo "masternodeprivkey=$privkey7" >> /home/proxynode7/prx.conf
+echo "masternodeprivkey=$MNKEY7" >> /home/proxynode7/prx.conf
 if [[ $NULLREC = "y" ]] ; then
 echo "masterNode7 : true" >> /usr/local/nullentrydev/prx.log
 echo "walletVersion7 : 1.0.0" >> /usr/local/nullentrydev/prx.log
-echo "scriptVersion7 : 0.9d" >> /usr/local/nullentrydev/prx.log
+echo "scriptVersion7 : 0.99" >> /usr/local/nullentrydev/prx.log
 fi
-sleep 5
+else
+echo
+echo -e ${YELLOW}"Found /home/proxynode7/prx.conf"${CLEAR}
+echo -e ${YELLOW}"Skipping Pre-stage for Seventh Node "${CLEAR}
+MN7=0
+fi
+else
+echo -e ${YELLOW}"Found /home/proxynode7/.proxynode/prx.conf"${CLEAR}
+echo -e ${YELLOW}"Skipping Configuration for Seventh Node"${CLEAR}
+fi
 echo
 echo -e "${RED}This process can take a while!${CLEAR}"
 echo -e "${YELLOW}Waiting on First Masternode Block Chain to Synchronize${CLEAR}"
@@ -325,42 +586,42 @@ echo -e "${GREEN}Haulting and Replicating First ProxyNode Node${CLEAR}"
 
 prx-cli -datadir=/home/proxynode/.proxynode stop
 sleep 10
+if [[ "$MN2" -eq "0" ]]; then
 sudo cp -r /home/proxynode/.proxynode/* /home/proxynode2/.proxynode
-sleep 3
-sudo cp -r /home/proxynode/.proxynode/* /home/proxynode3/.proxynode
-sleep 3
-sudo cp -r /home/proxynode/.proxynode/* /home/proxynode4/.proxynode
-sleep 3
-sudo cp -r /home/proxynode/.proxynode/* /home/proxynode5/.proxynode
-sleep 3
-sudo cp -r /home/proxynode/.proxynode/* /home/proxynode6/.proxynode
-sleep 3
-sudo cp -r /home/proxynode/.proxynode/* /home/proxynode7/.proxynode
-sleep 3
 rm /home/proxynode2/.proxynode/prx.conf
-sleep 1
-rm /home/proxynode3/.proxynode/prx.conf
-sleep 1
-rm /home/proxynode4/.proxynode/prx.conf
-sleep 1
-rm /home/proxynode5/.proxynode/prx.conf
-sleep 1
-rm /home/proxynode6/.proxynode/prx.conf
-sleep 1
-rm /home/proxynode7/.proxynode/prx.conf
-sleep 1
 cp -r /home/proxynode2/prx.conf /home/proxynode2/.proxynode/prx.conf
 sleep 1
+fi
+if [[ "$MN3" -eq "0" ]]; then
+sudo cp -r /home/proxynode/.proxynode/* /home/proxynode3/.proxynode
+rm /home/proxynode3/.proxynode/prx.conf
 cp -r /home/proxynode3/prx.conf /home/proxynode3/.proxynode/prx.conf
 sleep 1
+fi
+if [[ "$MN4" -eq "0" ]]; then
+sudo cp -r /home/proxynode/.proxynode/* /home/proxynode4/.proxynode
+rm /home/proxynode4/.proxynode/prx.conf
 cp -r /home/proxynode4/prx.conf /home/proxynode4/.proxynode/prx.conf
 sleep 1
+fi
+if [[ "$MN5" -eq "0" ]]; then
+sudo cp -r /home/proxynode/.proxynode/* /home/proxynode5/.proxynode
+rm /home/proxynode5/.proxynode/prx.conf
 cp -r /home/proxynode5/prx.conf /home/proxynode5/.proxynode/prx.conf
 sleep 1
+fi
+if [[ "$MN6" -eq "0" ]]; then
+sudo cp -r /home/proxynode/.proxynode/* /home/proxynode6/.proxynode
+rm /home/proxynode6/.proxynode/prx.conf
 cp -r /home/proxynode6/prx.conf /home/proxynode6/.proxynode/prx.conf
 sleep 1
+fi
+if [[ "$MN7" -eq "0" ]]; then
+sudo cp -r /home/proxynode/.proxynode/* /home/proxynode7/.proxynode
+rm /home/proxynode7/.proxynode/prx.conf
 cp -r /home/proxynode7/prx.conf /home/proxynode7/.proxynode/prx.conf
 sleep 1
+fi
 echo -e ${YELLOW}"Launching First PRX Node"${CLEAR}
 prxd -datadir=/home/proxynode/.proxynode -daemon
 sleep 20

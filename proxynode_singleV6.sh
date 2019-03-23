@@ -1,5 +1,5 @@
 #!/bin/bash
-#0.9d-- NullEntryDev Script
+#0.99-- NullEntryDev Script
 NODESL=One
 NODESN=1
 BLUE='\033[0;96m'
@@ -27,11 +27,23 @@ echo -e ${BLUE}"Zero Confidental information or Wallet keys will be stored in it
 echo -e ${YELLOW}"Press y to agree followed by [ENTER], or just [ENTER] to disagree"${CLEAR}
 read NULLREC
 echo
+echo -e ${GREEN}"Would you like to enter custom IP addresses?"${CLEAR}
+echo -e ${YELLOW}"If you don't know the answer, hit n for no"${CLEAR}
+echo -e ${YELLOW}"If you have custom IPs hit y for yes"${CLEAR}
+read customIP
+echo "Creating ${NODESN} ProxyNode system user(s) with no-login access:"
+if id "proxynode" >/dev/null 2>&1; then
+echo "user exists"
+MN1=1
+else
+sudo adduser --system --home /home/proxynode proxynode
+MN1=0
+fi
 echo
 echo
 echo
 echo
-echo -e ${RED}"Your Masternode Private Key is needed,"${CLEAR}
+echo -e ${RED}"Your New Masternode Private Key is needed,"${CLEAR}
 echo -e ${GREEN}" -which can be generated from the local wallet"${CLEAR}
 echo
 echo -e ${YELLOW}"You can edit the config later if you don't have this"${CLEAR}
@@ -40,11 +52,13 @@ echo -e ${YELLOW}"And the script installation will hang and fail"${CLEAR}
 echo
 echo -e ${YELLOW}"Right Click to paste in some SSH Clients"${CLEAR}
 echo
+if [[ "$MN1" -eq "0" ]]; then
 echo -e ${GREEN}"Please Enter Your Masternode Private Key:"${CLEAR}
-read privkey
+read MNKEY
 echo
-echo "Creating ${NODESN} ProxyNode system users with no-login access:"
-sudo adduser --system --home /home/proxynode proxynode
+else
+echo -e ${YELLOW}"Skipping First Masternode Key"${CLEAR}
+fi
 cd ~
 if [[ $NULLREC = "y" ]] ; then
 if [ ! -d /usr/local/nullentrydev/ ]; then
@@ -97,23 +111,116 @@ if [[ $NULLREC = "y" ]] ; then
 echo "dependenciesInstalled: true" >> /usr/local/nullentrydev/mnodes.log
 fi
 fi
+if [[ customIP = "y" ]] ; then
+echo -e ${GREEN}"IP for Masternode 1"${CLEAR}
+read MNIP1
+else
+regex='^([0-9a-fA-F]{0,4}:){1,7}[0-9a-fA-F]{0,4}$'
+FINDIP=$(hostname -I | cut -f2 -d' '| cut -f1-7 -d:)
+if [[ $FINDIP =~ $regex ]]; then
+echo "IPv6 Address check is good"
+echo ${FINDIP} testing note
+IP=${FINDIP}
+echo ${IP}
+else
+echo "IPv6 Address check is not expected, getting IPv6 Helper to recalculate"
+echo $FINDIP - testing note 1
+sudo apt-get install sipcalc
+echo $FINDIP - testing note 2
+FINDIP=$(hostname -I | cut -f3 -d' '| cut -f1-8 -d:)
+echo $FINDIP - check 3
+echo "Attempting to adjust results and re-calculate IPv6 Address"
+FINDIP=$(sipcalc ${FINDIP} | fgrep Expanded | cut -d ' ' -f3)
+if [[ $FINDIP =~ $regex ]]; then
+FINDIP=$(echo ${FINDIP} | cut -f1-7 -d:)
+echo "IPv6 Address check is good"
+IP=${FINDIP}
+else
+echo "IPv6 Addressing check has failed. Contact NullEntry Support"
+echo ${IP} testing note
+exit 1
+fi
+fi
+echo ${MNIP1} testing note
+echo ${IP} testing note
 echo -e ${YELLOW} "Building IP Tables"${CLEAR}
 sudo touch ip.tmp
-IP=$(hostname -I | cut -f2 -d' '| cut -f1-7 -d:)
 for i in {15361..15375}; do printf "${IP}:%.4x\n" $i >> ip.tmp; done
 MNIP1=$(sed -n '1p' < ip.tmp)
-if [[ $NULLREC = "y" ]] ; then
-sudo touch /usr/local/nullentrydev/iptable.log
-sudo cp ip.tmp >> /usr/local/nullentrydev/iptable.log
-fi
 rm -rf ip.tmp
+fi
+if grep -Fxq "swapInstalled: true" /usr/local/nullentrydev/mnodes.log
+then
+echo -e ${RED}"Skipping... Swap Area already made"${CLEAR}
+else
 cd /var
 sudo touch swap.img
 sudo chmod 600 swap.img
 sudo dd if=/dev/zero of=/var/swap.img bs=1024k count=4096
 sudo mkswap /var/swap.img
 sudo swapon /var/swap.img
+if [[ $NULLREC = "y" ]] ; then
+echo "swapInstalled: true" >> /usr/local/nullentrydev/mnodes.log
+fi
+fi
 cd ~
+touch prxcheck.tmp
+ps aux | grep proxynode >> prxcheck.tmp
+if grep home/proxynode/.prx prxcheck.tmp
+then
+echo Found OLD ${NC} prx Node running
+OldNode="1"
+else
+echo No ${NC} prx Node not running
+OldNode="0"
+fi
+until [[ $NC = 9 ]]; do
+if grep /home/proxynode${NC}/.prx prxcheck.tmp
+then
+echo Found ${NC} prx Node running
+declare IPN$NC="1"
+RB=1
+else
+echo No ${NC} prx Node not running
+declare IPN$NC="0"
+echo $NC
+fi
+NC=$[$NC+1]
+done
+rm -r prxcheck.tmp
+if [[ "$OldNode" = "1" ]]; then
+prx-cli -datadir=/home/proxynode/.proxynode stop
+fi
+if [[ "$IPN1" = "1" ]]; then
+prx-cli -datadir=/home/proxynode1/.proxynode stop
+fi
+if [[ "$IPN2" = "1" ]]; then
+prx-cli -datadir=/home/proxynode2/.proxynode stop
+fi
+if [[ "$IPN3" = "1" ]]; then
+prx-cli -datadir=/home/proxynode3/.proxynode stop
+fi
+if [[ "$IPN4" = "1" ]]; then
+prx-cli -datadir=/home/proxynode4/.proxynode stop
+fi
+if [[ "$IPN5" = "1" ]]; then
+prx-cli -datadir=/home/proxynode5/.proxynode stop
+fi
+if [[ "$IPN6" = "1" ]]; then
+prx-cli -datadir=/home/proxynode6/.proxynode stop
+fi
+if [[ "$IPN7" = "1" ]]; then
+prx-cli -datadir=/home/proxynode7/.proxynode stop
+fi
+if [[ "$IPN8" = "1" ]]; then
+prx-cli -datadir=/home/proxynode8/.proxynode stop
+fi
+if [[ "$IPN9" = "1" ]]; then
+prx-cli -datadir=/home/proxynode9/.proxynode stop
+fi
+if [[ "$IPN0" = "1" ]]; then
+prx-cli -datadir=/home/proxynode0/.proxynode stop
+fi
 if [ ! -d /root/prx ]; then
 sudo mkdir /root/prx
 fi
@@ -125,6 +232,7 @@ sleep 3
 sudo mv /root/prx/Linux/bin/prxd /root/prx/Linux/bin/prx-cli /usr/local/bin
 sudo chmod 755 -R /usr/local/bin/prx*
 rm -rf /root/prx
+if [ ! -f /home/proxynode/.proxynode/prx.conf ]; then
 echo -e "${GREEN}Configuring ProxyNode Node${CLEAR}"
 sudo mkdir /home/proxynode/.proxynode
 sudo touch /home/proxynode/.proxynode/prx.conf
@@ -135,16 +243,26 @@ echo "server=1" >> /home/proxynode/.proxynode/prx.conf
 echo "daemon=1" >> /home/proxynode/.proxynode/prx.conf
 echo "maxconnections=250" >> /home/proxynode/.proxynode/prx.conf
 echo "masternode=1" >> /home/proxynode/.proxynode/prx.conf
-echo "rpcport=12196" >> /home/proxynode/.proxynode/prx.conf
+echo "rpcport=12195" >> /home/proxynode/.proxynode/prx.conf
 echo "listen=0" >> /home/proxynode/.proxynode/prx.conf
 echo "externalip=[${MNIP1}]:12195" >> /home/proxynode/.proxynode/prx.conf
-echo "masternodeprivkey=$privkey" >> /home/proxynode/.proxynode/prx.conf
+echo "masternodeprivkey=$MNKEY" >> /home/proxynode/.proxynode/prx.conf
+echo "addnode=23.94.102.195" >> /home/proxynode/.proxynode/prx.conf
+echo "addnode=108.61.75.117" >> /home/proxynode/.proxynode/prx.conf
+echo "addnode=178.32.121.122" >> /home/proxynode/.proxynode/prx.conf
+echo "addnode=207.148.85.235" >> /home/proxynode/.proxynode/prx.conf
+echo "addnode=192.99.59.104" >> /home/proxynode/.proxynode/prx.conf
+echo "addnode=45.32.14.151" >> /home/proxynode/.proxynode/prx.conf
+MN1=0
 if [[ $NULLREC = "y" ]] ; then
 echo "masterNode1 : true" >> /usr/local/nullentrydev/prx.log
 echo "walletVersion1 : 1.0.0" >> /usr/local/nullentrydev/prx.log
-echo "scriptVersion1 : 0.9d" >> /usr/local/nullentrydev/prx.log
+echo "scriptVersion1 : 0.99" >> /usr/local/nullentrydev/prx.log
 fi
-sleep 5
+else
+echo -e ${YELLOW}"Found /home/proxynode/.proxynode/prx.conf"${CLEAR}
+echo -e ${YELLOW}"Skipping Configuration there"${CLEAR}
+fi
 echo
 echo -e ${YELLOW}"Launching PRX Node"${CLEAR}
 prxd -datadir=/home/proxynode/.proxynode -daemon
