@@ -1102,7 +1102,7 @@ function_masternode_upgrade(){
     local choice
   	read -p "Enter choice " choice
     case $choice in
-      1)bash <(curl -Ls https://raw.githubusercontent.com/sburns1369/ProxyNode_MN_Script/master/proxynode_singleV4.sh);;
+      1)bash <(curl -Ls https://raw.githubusercontent.com/sburns1369/ProxyNode_MN_Script/master/proxynode_singleV4.sh)
       pause ;;
       2)bash <(curl -Ls https://raw.githubusercontent.com/sburns1369/ProxyNode_MN_Script/master/proxyode_2pack.sh)
       pause ;;
