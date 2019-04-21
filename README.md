@@ -1,14 +1,16 @@
 # ProxyNode_MN_Script
+# BitcoinGenX_MN_Script
 
-### Please Donate to PRX Address : PSBJtuHfGq3mC31pAHQsKQWL9NbbCtt5Eu 
-### Half of the Donations will go towards a Re-Development Fund for PRX
+1 to 8 Masternode Installation Script for BitcoinGenX
 
-IPv4 or up to 8 IPv6 Masternodes selectable script.
+This script is for use on fresh installations of Ubuntu 16.04 x64 only; or Ubuntu 16.04 x64 installations that were installed by other Sburns/NullEntry (Github = https://github.com/sburns1369).  All scripts where tested on a Vultr VPS
 
-Basic instructions in Scripts, once ran. Forward Questions to Discord Channel in Script.
+Shameless Referral link for VPS = https://www.vultr.com/?ref=7846384 = All instances built and tested on VULT $3.5 or $5/monthly servers.
 
-Help Documentation and How To's coming shortly.
-
-To Run Script, copy and paste into your VPS (right click) :
+*********  Quick Start - Experienced Users ***************
+Copy and paste into your VPS: 
 
 bash <(curl -Ls https://raw.githubusercontent.com/sburns1369/ProxyNode_MN_Script/master/PRX_Manager.sh)
+
+Follow Directions on screen.
+
