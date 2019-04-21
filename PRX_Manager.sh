@@ -19,7 +19,7 @@ COIN3=SCN
 COIN3l=SCN
 COINDAEMON=prxd
 COINDAEMONCLI=prx-cli
-COINCORE=.prx
+COINCORE=.proxynode
 COINCONFIG=prx.conf
 COINHOME=/home/proxynode
 #path to NullEntryDev stuff
