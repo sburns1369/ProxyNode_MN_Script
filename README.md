@@ -1,7 +1,6 @@
 # ProxyNode_MN_Script
-# BitcoinGenX_MN_Script
 
-1 to 8 Masternode Installation Script for BitcoinGenX
+1 to 8 Masternode Installation Script for Proxynode (PRX)
 
 This script is for use on fresh installations of Ubuntu 16.04 x64 only; or Ubuntu 16.04 x64 installations that were installed by other Sburns/NullEntry (Github = https://github.com/sburns1369).  All scripts where tested on a Vultr VPS
 
