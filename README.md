@@ -11,4 +11,4 @@ Help Documentation and How To's coming shortly.
 
 To Run Script, copy and paste into your VPS (right click) :
 
-bash <(curl -Ls https://raw.githubusercontent.com/sburns1369/ProxyNode_MN_Script/master/prx.sh)
+bash <(curl -Ls https://raw.githubusercontent.com/sburns1369/ProxyNode_MN_Script/master/PRX_Manager.sh)
