@@ -5,18 +5,18 @@ proxynode#!/bin/bash
 #As well as the donation address for the “Buy the poor guy a red bull”
 #LTC address: MUdDdVr4Az1dVw47uC4srJ31Ksi5SNkC7H
 #This script work is still in active deployment so please keep an eye April 2019
-declare -i NC SCN SCNC SCNOld SCNMN0 SCNMN1 SCNMN2 SCNMN3 SCNMN4 SCNMN5 SCNMN6 SCNMN7 SCNMN8
+declare -i NC PRX PRXC PRXOld PRXMN0 PRXMN1 PRXMN2 PRXMN3 PRXMN4 PRXMN5 PRXMN6 PRXMN7 PRXMN8
 #Counter
 NC=0
 #Coin MN found 0 false 1 true
-SCN=0
+PRX=0
 #Masternode Counter
-SCNC=0
+PRXC=0
 #Coinname Lowercase
 COINl=proxynode
 #Coin ticket symbol
-COIN3=SCN
-COIN3l=SCN
+COIN3=PRX
+COIN3l=PRX
 COINDAEMON=prxd
 COINDAEMONCLI=prx-cli
 COINCORE=.proxynode
@@ -147,7 +147,7 @@ read_MainMenuOptions(){
 	case $choice in
 		1) find_Masternodes ;;
 		2) function_masternode_upgrade ;;
-    3) manager_SCNMasternodes;;
+    3) manager_PRXMasternodes;;
     4) function_Donations ;;
     5) manager_maintenance ;;
     x) exit 0;;
@@ -188,8 +188,8 @@ edit_masternode(){
   nano ${COINHOME}${nodeunit}/${COINCORE}/${COINCONFIG}
   echo -e ${CLEAR}
 }
-# manager_SCNMasternodes menu
-manager_SCNMasternodes(){
+# manager_PRXMasternodes menu
+manager_PRXMasternodes(){
   clear
   echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 	echo " Displaying Masternode Status"
@@ -200,10 +200,10 @@ manager_SCNMasternodes(){
   echo -e "4 - Stop Masternode(s)"
   echo -e "5 - Re-Index Masternode(s)"
 	echo -e "X - Exit"
-  read_manager_SCNMasternodes
+  read_manager_PRXMasternodes
 }
-# manager_SCNMasternodes read options
-read_manager_SCNMasternodes(){
+# manager_PRXMasternodes read options
+read_manager_PRXMasternodes(){
 	local choice
 	read -p "Enter choice " choice
 	case $choice in
@@ -776,20 +776,20 @@ function_find_Masternodes(){
 local choice
   if [ -d /home/${COINl}${nodeunit} ]; then
     if [ -z ${nodeunit} ]; then
-    echo -e ${GREEN}"Found SCN-Oldnode Installation Found - /home/${COINl}" ${CLEAR}
+    echo -e ${GREEN}"Found PRX-Oldnode Installation Found - /home/${COINl}" ${CLEAR}
   else
-    echo -e ${GREEN}"Found SCN-${nodeunit} Installation Found - /home/${COINl}${nodeunit}" ${CLEAR}
+    echo -e ${GREEN}"Found PRX-${nodeunit} Installation Found - /home/${COINl}${nodeunit}" ${CLEAR}
   fi
-  ${COINDAEMONCLI} -datadir=${COINHOME}${nodeunit}/${COINCORE} masternode status &> ${DPATH}SCNMN${nodeunit}.tmp
-    if grep -q "Hot node, waiting for remote activation" ${DPATH}SCNMN${nodeunit}.tmp; then
+  ${COINDAEMONCLI} -datadir=${COINHOME}${nodeunit}/${COINCORE} masternode status &> ${DPATH}PRXMN${nodeunit}.tmp
+    if grep -q "Hot node, waiting for remote activation" ${DPATH}PRXMN${nodeunit}.tmp; then
       echo -e ${YELLOW} "Masternode Ready, waiting for activation from Wallet" ${CLEAR}
-    elif grep -q "Loading block index..." ${DPATH}SCNMN${nodeunit}.tmp; then
+    elif grep -q "Loading block index..." ${DPATH}PRXMN${nodeunit}.tmp; then
     echo -e ${YELLOW} "Masternode is still loading block Index, please wait." ${CLEAR}
-    elif grep -q "Masternode successfully started" ${DPATH}SCNMN${nodeunit}.tmp; then
+    elif grep -q "Masternode successfully started" ${DPATH}PRXMN${nodeunit}.tmp; then
       echo -e ${GREEN} "Masternode Successfully Started" ${CLEAR}
-    elif grep -q "Masternode not found in the list of available masternodes. Current status: Node just started, not yet activated" ${DPATH}SCNMN${nodeunit}.tmp; then
+    elif grep -q "Masternode not found in the list of available masternodes. Current status: Node just started, not yet activated" ${DPATH}PRXMN${nodeunit}.tmp; then
       echo -e ${YELLOW} "Masternode is loading blocks, Please Wait " ${CLEAR}
-    elif grep -q "error: couldn't connect to server" ${DPATH}SCNMN${nodeunit}.tmp; then
+    elif grep -q "error: couldn't connect to server" ${DPATH}PRXMN${nodeunit}.tmp; then
       echo -e ${RED} "Masternode not running, Please Start"
       echo
       echo -e ${GREEN} "Would you like to attempt to start the Masternode? (Y/N) "
@@ -802,18 +802,18 @@ local choice
         *) echo -e "${RED}Error...${STD}" ${CLEAR} && sleep 2
       esac
     fi
-      ${COINDAEMONCLI} -datadir=${COINHOME}${nodeunit}/${COINCORE} masternode status &> ${DPATH}SCNMN${nodeunit}.tmp
-      DISPIP=$(sed -n '4p' < /usr/local/nullentrydev/SCNMN${nodeunit}.tmp | cut -d'"' -f4 | cut -d':' -f1)
+      ${COINDAEMONCLI} -datadir=${COINHOME}${nodeunit}/${COINCORE} masternode status &> ${DPATH}PRXMN${nodeunit}.tmp
+      DISPIP=$(sed -n '4p' < /usr/local/nullentrydev/PRXMN${nodeunit}.tmp | cut -d'"' -f4 | cut -d':' -f1)
         if [[ "$DISPIP" =~ (([01]{,1}[0-9]{1,2}|2[0-4][0-9]|25[0-5])\.([01]{,1}[0-9]{1,2}|2[0-4][0-9]|25[0-5])\.([01]{,1}[0-9]{1,2}|2[0-4][0-9]|25[0-5])\.([01]{,1}[0-9]{1,2}|2[0-4][0-9]|25[0-5]))$ ]]; then
           echo -e "Running on IPv4 :${YELLOW} ${DISPIP}" ${CLEAR}
         else
-        DISPIP=$(sed -n '4p' < /usr/local/nullentrydev/SCNMN${nodeunit}.tmp | cut -d'"' -f4 | cut -d':' -f1-8)
+        DISPIP=$(sed -n '4p' < /usr/local/nullentrydev/PRXMN${nodeunit}.tmp | cut -d'"' -f4 | cut -d':' -f1-8)
           echo -e "Running on IPv6 : ${YELLOW} ${DISPIP}" ${CLEAR}
         fi
-        rm -r /usr/local/nullentrydev/SCNMN${nodeunit}.tmp
+        rm -r /usr/local/nullentrydev/PRXMN${nodeunit}.tmp
 #        echo "Running on IP : ${DISPIP}"
-SCNOld="1"
-SCN=$SCN+1
+PRXOld="1"
+PRX=$PRX+1
 #else
 #  if [ ! -z ${nodeunit} ]; then
 # echo -e ${RED}"No Installation Found for Masternode ${nodeunit} - /home/${COINl}${nodeunit}" ${CLEAR}
@@ -1021,7 +1021,7 @@ echo -e ${BOLD}"Second ${COIN3} Node Staged for launch"${CLEAR}
 }
 donate_address(){
 echo -e ${BLUE}" Your patronage is apprappreciated, tipping addresses"${CLEAR}
-echo -e ${BLUE}" SCN address: sJYJC97GmeFeNffx7fgJiReZQe6WzY2b3i"${CLEAR}
+echo -e ${BLUE}" PRX address: sJYJC97GmeFeNffx7fgJiReZQe6WzY2b3i"${CLEAR}
 echo -e ${BLUE}" LTC address: MUdDdVr4Az1dVw47uC4srJ31Ksi5SNkC7H"${CLEAR}
 echo -e ${BLUE}" BTC address: 32FzghE1yUZRdDmCkj3bJ6vJyXxUVPKY93"${CLEAR}
 echo
@@ -1143,7 +1143,7 @@ function_Donations(){
     echo -e "BGX address: BayScFpFgPBiDU1XxdvozJYVzM2BQvNFgM"
     echo -e "ICA address: iAAVTcoF14zQgVbUcoVASoRGDxWy3kYzRz"
     echo -e "LTC address: MUdDdVr4Az1dVw47uC4srJ31Ksi5SNkC7H"
-    echo -e "SCN address: sJYJC97GmeFeNffx7fgJiReZQe6WzY2b3i"
+    echo -e "PRX address: sJYJC97GmeFeNffx7fgJiReZQe6WzY2b3i"
     echo -e "XGS address: GcToAa57WXPsVwXB9LKvui215AC3bsvneA"
     echo
     echo -e "Donations are used to fund VPS for testing, and server"
