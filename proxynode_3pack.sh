@@ -36,7 +36,7 @@ if id "proxynode" >/dev/null 2>&1; then
 echo "user exists"
 MN1=1
 else
-sudo adduser --system --home /home/proxynode proxynode
+sudo adduser --system --home /home/proxynode1 proxynode1
 MN1=0
 fi
 if id "proxynode2" >/dev/null 2>&1; then
@@ -266,27 +266,27 @@ sleep 3
 sudo mv /root/prx/Linux/bin/prxd /root/prx/Linux/bin/prx-cli /usr/local/bin
 sudo chmod 755 -R /usr/local/bin/prx*
 rm -rf /root/prx
-if [ ! -f /home/proxynode/.proxynode/prx.conf ]; then
+if [ ! -f /home/proxynode1/.proxynode/prx.conf ]; then
 echo -e "${GREEN}Configuring First ProxyNode Node${CLEAR}"
 sudo mkdir /home/proxynode/.proxynode
-sudo touch /home/proxynode/.proxynode/prx.conf
-echo "rpcuser=user"`shuf -i 100000-9999999 -n 1` >> /home/proxynode/.proxynode/prx.conf
-echo "rpcpassword=pass"`shuf -i 100000-9999999 -n 1` >> /home/proxynode/.proxynode/prx.conf
-echo "rpcallowip=127.0.0.1" >> /home/proxynode/.proxynode/prx.conf
-echo "server=1" >> /home/proxynode/.proxynode/prx.conf
-echo "daemon=1" >> /home/proxynode/.proxynode/prx.conf
-echo "maxconnections=250" >> /home/proxynode/.proxynode/prx.conf
-echo "masternode=1" >> /home/proxynode/.proxynode/prx.conf
-echo "rpcport=12195" >> /home/proxynode/.proxynode/prx.conf
-echo "listen=0" >> /home/proxynode/.proxynode/prx.conf
-echo "externalip=[${MNIP1}]:12195" >> /home/proxynode/.proxynode/prx.conf
-echo "masternodeprivkey=$MNKEY" >> /home/proxynode/.proxynode/prx.conf
-echo "addnode=23.94.102.195" >> /home/proxynode/.proxynode/prx.conf
-echo "addnode=108.61.75.117" >> /home/proxynode/.proxynode/prx.conf
-echo "addnode=178.32.121.122" >> /home/proxynode/.proxynode/prx.conf
-echo "addnode=207.148.85.235" >> /home/proxynode/.proxynode/prx.conf
-echo "addnode=192.99.59.104" >> /home/proxynode/.proxynode/prx.conf
-echo "addnode=45.32.14.151" >> /home/proxynode/.proxynode/prx.conf
+sudo touch /home/proxynode1/.proxynode/prx.conf
+echo "rpcuser=user"`shuf -i 100000-9999999 -n 1` >> /home/proxynode1/.proxynode/prx.conf
+echo "rpcpassword=pass"`shuf -i 100000-9999999 -n 1` >> /home/proxynode1/.proxynode/prx.conf
+echo "rpcallowip=127.0.0.1" >> /home/proxynode1/.proxynode/prx.conf
+echo "server=1" >> /home/proxynode1/.proxynode/prx.conf
+echo "daemon=1" >> /home/proxynode1/.proxynode/prx.conf
+echo "maxconnections=250" >> /home/proxynode1/.proxynode/prx.conf
+echo "masternode=1" >> /home/proxynode1/.proxynode/prx.conf
+echo "rpcport=12195" >> /home/proxynode1/.proxynode/prx.conf
+echo "listen=0" >> /home/proxynode1/.proxynode/prx.conf
+echo "externalip=[${MNIP1}]:12195" >> /home/proxynode1/.proxynode/prx.conf
+echo "masternodeprivkey=$MNKEY" >> /home/proxynode1/.proxynode/prx.conf
+echo "addnode=23.94.102.195" >> /home/proxynode1/.proxynode/prx.conf
+echo "addnode=108.61.75.117" >> /home/proxynode1/.proxynode/prx.conf
+echo "addnode=178.32.121.122" >> /home/proxynode1/.proxynode/prx.conf
+echo "addnode=207.148.85.235" >> /home/proxynode1/.proxynode/prx.conf
+echo "addnode=192.99.59.104" >> /home/proxynode1/.proxynode/prx.conf
+echo "addnode=45.32.14.151" >> /home/proxynode1/.proxynode/prx.conf
 MN1=0
 if [[ $NULLREC = "y" ]] ; then
 echo "masterNode1 : true" >> /usr/local/nullentrydev/prx.log
@@ -294,12 +294,12 @@ echo "walletVersion1 : 1.0.0" >> /usr/local/nullentrydev/prx.log
 echo "scriptVersion1 : 0.99" >> /usr/local/nullentrydev/prx.log
 fi
 else
-echo -e ${YELLOW}"Found /home/proxynode/.proxynode/prx.conf"${CLEAR}
+echo -e ${YELLOW}"Found /home/proxynode1/.proxynode/prx.conf"${CLEAR}
 echo -e ${YELLOW}"Skipping Configuration there"${CLEAR}
 fi
 echo
 echo -e ${YELLOW}"Launching First PRX Node"${CLEAR}
-prxd -datadir=/home/proxynode/.proxynode -daemon
+prxd -datadir=/home/proxynode1/.proxynode -daemon
 echo
 echo -e ${YELLOW}"Looking for a Shared Masternode Service? Check out Crypto Hash Tank" ${CLEAR}
 echo -e ${YELLOW}"Support my Project, and put your loose change to work for you!" ${CLEAR}
@@ -324,7 +324,7 @@ echo "rpcport=12196" >> /home/proxynode2/prx.conf
 echo "listen=0" >> /home/proxynode2/prx.conf
 echo "externalip=[${MNIP2}]:12195" >> /home/proxynode2/prx.conf
 echo "masternodeprivkey=$MNKEY2" >> /home/proxynode2/prx.conf
-echo "addnode=[${MNIP1}]" >> /home/proxynode/.proxynode/prx.conf
+echo "addnode=[${MNIP1}]" >> /home/proxynode1/.proxynode/prx.conf
 if [[ $NULLREC = "y" ]] ; then
 echo "masterNode2 : true" >> /usr/local/nullentrydev/prx.log
 echo "walletVersion2 : 1.0.0" >> /usr/local/nullentrydev/prx.log
@@ -380,28 +380,28 @@ echo -e "${YELLOW}Once complete, it will stop and copy the block chain to${CLEAR
 echo -e "${YELLOW}the other masternodes. This prevent all masternodes${CLEAR}"
 echo -e "${YELLOW}from downloading the block chain individually; taking up${CLEAR}"
 echo -e "${YELLOW}more time and resources. Current Block count will be displayed below.${CLEAR}"
-until prx-cli -datadir=/home/proxynode/.proxynode mnsync status | grep -m 1 'IsBlockchainSynced" : true'; do
-prx-cli -datadir=/home/proxynode/.proxynode getblockcount
+until prx-cli -datadir=/home/proxynode1/.proxynode mnsync status | grep -m 1 'IsBlockchainSynced" : true'; do
+prx-cli -datadir=/home/proxynode1/.proxynode getblockcount
 sleep 60
 done
 echo -e "${GREEN}Haulting and Replicating First ProxyNode Node${CLEAR}"
 
-prx-cli -datadir=/home/proxynode/.proxynode stop
+prx-cli -datadir=/home/proxynode1/.proxynode stop
 sleep 10
 if [[ "$MN2" -eq "0" ]]; then
-sudo cp -r /home/proxynode/.proxynode/* /home/proxynode2/.proxynode
+sudo cp -r /home/proxynode1/.proxynode/* /home/proxynode2/.proxynode
 rm /home/proxynode2/.proxynode/prx.conf
 cp -r /home/proxynode2/prx.conf /home/proxynode2/.proxynode/prx.conf
 sleep 1
 fi
 if [[ "$MN3" -eq "0" ]]; then
-sudo cp -r /home/proxynode/.proxynode/* /home/proxynode3/.proxynode
+sudo cp -r /home/proxynode1/.proxynode/* /home/proxynode3/.proxynode
 rm /home/proxynode3/.proxynode/prx.conf
 cp -r /home/proxynode3/prx.conf /home/proxynode3/.proxynode/prx.conf
 sleep 1
 fi
 echo -e ${YELLOW}"Launching First PRX Node"${CLEAR}
-prxd -datadir=/home/proxynode/.proxynode -daemon
+prxd -datadir=/home/proxynode1/.proxynode -daemon
 sleep 20
 echo -e ${YELLOW}"Launching Second PRX Node"${CLEAR}
 prxd -datadir=/home/proxynode2/.proxynode -daemon
@@ -413,7 +413,7 @@ echo -e ${BOLD}"All ${NODESN} PRX Nodes Launched".${CLEAR}
 echo
 
 echo -e "${GREEN}You can check the status of your PRX Masternode with"${CLEAR}
-echo -e "${YELLOW}For mn1: \"prx-cli -datadir=/home/proxynode/.proxynode masternode status\""${CLEAR}
+echo -e "${YELLOW}For mn1: \"prx-cli -datadir=/home/proxynode1/.proxynode masternode status\""${CLEAR}
 echo -e "${YELLOW}For mn2: \"prx-cli -datadir=/home/proxynode2/.proxynode masternode status\""${CLEAR}
 echo -e "${YELLOW}For mn3: \"prx-cli -datadir=/home/proxynode3/.proxynode masternode status\""${CLEAR}
 echo

@@ -1143,7 +1143,7 @@ function_Donations(){
     echo -e "BGX address: BayScFpFgPBiDU1XxdvozJYVzM2BQvNFgM"
     echo -e "ICA address: iAAVTcoF14zQgVbUcoVASoRGDxWy3kYzRz"
     echo -e "LTC address: MUdDdVr4Az1dVw47uC4srJ31Ksi5SNkC7H"
-    echo -e "PRX address: sJYJC97GmeFeNffx7fgJiReZQe6WzY2b3i"
+    echo -e "PRX address: PRa4W66rUB8VN3wiynBwC7YYFc8fC6ywxQ"
     echo -e "XGS address: GcToAa57WXPsVwXB9LKvui215AC3bsvneA"
     echo
     echo -e "Donations are used to fund VPS for testing, and server"
