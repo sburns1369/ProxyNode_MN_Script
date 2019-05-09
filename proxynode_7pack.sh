@@ -32,7 +32,7 @@ echo -e ${YELLOW}"If you don't know the answer, hit n for no"${CLEAR}
 echo -e ${YELLOW}"If you have custom IPs hit y for yes"${CLEAR}
 read customIP
 echo "Creating ${NODESN} ProxyNode system user(s) with no-login access:"
-if id "proxynode" >/dev/null 2>&1; then
+if id "proxynode1" >/dev/null 2>&1; then
 echo "user exists"
 MN1=1
 else
