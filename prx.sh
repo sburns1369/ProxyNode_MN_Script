@@ -913,9 +913,9 @@ echo -e "         ."
   local choice
   if [ -d /home/${COINl}${nodeunit} ]; then
     if [ -z ${nodeunit} ]; then
-    echo -e ${GREEN}"Found XGS-Oldnode Installation Found - /home/${COINl}" ${CLEAR}
+    echo -e ${GREEN}"Found PRX-Oldnode Installation Found - /home/${COINl}" ${CLEAR}
   else
-    echo -e ${GREEN}"Found XGS-${nodeunit} Installation Found - /home/${COINl}${nodeunit}" ${CLEAR}
+    echo -e ${GREEN}"Found PRX-${nodeunit} Installation Found - /home/${COINl}${nodeunit}" ${CLEAR}
   fi
   ${COINDAEMONCLI} -datadir=${COINHOME}${nodeunit}/${COINCORE} masternode status &> ${DPATH}XGSMN${nodeunit}.tmp
     if grep -q "Hot node, waiting for remote activation" ${DPATH}XGSMN${nodeunit}.tmp; then
