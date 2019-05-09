@@ -32,11 +32,11 @@ echo -e ${YELLOW}"If you don't know the answer, hit n for no"${CLEAR}
 echo -e ${YELLOW}"If you have custom IPs hit y for yes"${CLEAR}
 read customIP
 echo "Creating ${NODESN} ProxyNode system user(s) with no-login access:"
-if id "proxynode" >/dev/null 2>&1; then
+if id "proxynode1" >/dev/null 2>&1; then
 echo "user exists"
 MN1=1
 else
-sudo adduser --system --home /home/proxynode proxynode
+sudo adduser --system --home /home/proxynode1 proxynode1
 MN1=0
 fi
 if id "proxynode2" >/dev/null 2>&1; then
@@ -316,7 +316,7 @@ echo -e ${YELLOW}"Skipping Configuration there"${CLEAR}
 fi
 echo
 echo -e ${YELLOW}"Launching First PRX Node"${CLEAR}
-prxd -datadir=/home/proxynode/.proxynode -daemon
+prxd -datadir=/home/proxynode1/.proxynode -daemon
 echo
 echo -e ${YELLOW}"Looking for a Shared Masternode Service? Check out Crypto Hash Tank" ${CLEAR}
 echo -e ${YELLOW}"Support my Project, and put your loose change to work for you!" ${CLEAR}
@@ -429,13 +429,13 @@ echo -e "${YELLOW}Once complete, it will stop and copy the block chain to${CLEAR
 echo -e "${YELLOW}the other masternodes. This prevent all masternodes${CLEAR}"
 echo -e "${YELLOW}from downloading the block chain individually; taking up${CLEAR}"
 echo -e "${YELLOW}more time and resources. Current Block count will be displayed below.${CLEAR}"
-until prx-cli -datadir=/home/proxynode/.proxynode mnsync status | grep -m 1 'IsBlockchainSynced" : true'; do
-prx-cli -datadir=/home/proxynode/.proxynode getblockcount
+until prx-cli -datadir=/home/proxynode1/.proxynode mnsync status | grep -m 1 'IsBlockchainSynced" : true'; do
+prx-cli -datadir=/home/proxynode1/.proxynode getblockcount
 sleep 60
 done
 echo -e "${GREEN}Haulting and Replicating First ProxyNode Node${CLEAR}"
 
-prx-cli -datadir=/home/proxynode/.proxynode stop
+prx-cli -datadir=/home/proxynode1/.proxynode stop
 sleep 10
 if [[ "$MN2" -eq "0" ]]; then
 sudo cp -r /home/proxynode1/.proxynode/* /home/proxynode2/.proxynode
@@ -456,7 +456,7 @@ cp -r /home/proxynode4/prx.conf /home/proxynode4/.proxynode/prx.conf
 sleep 1
 fi
 echo -e ${YELLOW}"Launching First PRX Node"${CLEAR}
-prxd -datadir=/home/proxynode/.proxynode -daemon
+prxd -datadir=/home/proxynode1/.proxynode -daemon
 sleep 20
 echo -e ${YELLOW}"Launching Second PRX Node"${CLEAR}
 prxd -datadir=/home/proxynode2/.proxynode -daemon
@@ -471,7 +471,7 @@ echo -e ${BOLD}"All ${NODESN} PRX Nodes Launched".${CLEAR}
 echo
 
 echo -e "${GREEN}You can check the status of your PRX Masternode with"${CLEAR}
-echo -e "${YELLOW}For mn1: \"prx-cli -datadir=/home/proxynode/.proxynode masternode status\""${CLEAR}
+echo -e "${YELLOW}For mn1: \"prx-cli -datadir=/home/proxynode1/.proxynode masternode status\""${CLEAR}
 echo -e "${YELLOW}For mn2: \"prx-cli -datadir=/home/proxynode2/.proxynode masternode status\""${CLEAR}
 echo -e "${YELLOW}For mn3: \"prx-cli -datadir=/home/proxynode3/.proxynode masternode status\""${CLEAR}
 echo -e "${YELLOW}For mn4: \"prx-cli -datadir=/home/proxynode4/.proxynode masternode status\""${CLEAR}
