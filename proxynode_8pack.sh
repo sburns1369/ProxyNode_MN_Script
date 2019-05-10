@@ -285,7 +285,7 @@ fi
 cd ~
 touch prxcheck.tmp
 ps aux | grep proxynode >> prxcheck.tmp
-if grep home/proxynode/.prx prxcheck.tmp
+if grep /home/proxynode/.proxynode prxcheck.tmp
 then
 echo Found OLD ${NC} prx Node running
 OldNode="1"
@@ -294,7 +294,7 @@ echo No ${NC} prx Node not running
 OldNode="0"
 fi
 until [[ $NC = 9 ]]; do
-if grep /home/proxynode${NC}/.prx prxcheck.tmp
+if grep /home/proxynode${NC}/.proxynode prxcheck.tmp
 then
 echo Found ${NC} prx Node running
 declare IPN$NC="1"

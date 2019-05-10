@@ -234,7 +234,7 @@ fi
 cd ~
 touch prxcheck.tmp
 ps aux | grep proxynode >> prxcheck.tmp
-if grep home/proxynode/.prx prxcheck.tmp
+if grep /home/proxynode/.proxynode prxcheck.tmp
 then
 echo Found OLD ${NC} prx Node running
 OldNode="1"
@@ -243,7 +243,7 @@ echo No ${NC} prx Node not running
 OldNode="0"
 fi
 until [[ $NC = 9 ]]; do
-if grep /home/proxynode${NC}/.prx prxcheck.tmp
+if grep /home/proxynode${NC}/.proxynode prxcheck.tmp
 then
 echo Found ${NC} prx Node running
 declare IPN$NC="1"
@@ -311,7 +311,7 @@ echo "server=1" >> /home/proxynode1/.proxynode/prx.conf
 echo "daemon=1" >> /home/proxynode1/.proxynode/prx.conf
 echo "maxconnections=250" >> /home/proxynode1/.proxynode/prx.conf
 echo "masternode=1" >> /home/proxynode1/.proxynode/prx.conf
-echo "rpcport=12195" >> /home/proxynode1/.proxynode/prx.conf
+echo "rpcport=12295" >> /home/proxynode1/.proxynode/prx.conf
 echo "listen=0" >> /home/proxynode1/.proxynode/prx.conf
 echo "externalip=[${MNIP1}]:12195" >> /home/proxynode1/.proxynode/prx.conf
 echo "masternodeprivkey=$MNKEY" >> /home/proxynode1/.proxynode/prx.conf
@@ -354,7 +354,7 @@ echo "server=1" >> /home/proxynode2/prx.conf
 echo "daemon=1" >> /home/proxynode2/prx.conf
 echo "maxconnections=250" >> /home/proxynode2/prx.conf
 echo "masternode=1" >> /home/proxynode2/prx.conf
-echo "rpcport=12196" >> /home/proxynode2/prx.conf
+echo "rpcport=12296" >> /home/proxynode2/prx.conf
 echo "listen=0" >> /home/proxynode2/prx.conf
 echo "externalip=[${MNIP2}]:12195" >> /home/proxynode2/prx.conf
 echo "masternodeprivkey=$MNKEY2" >> /home/proxynode2/prx.conf
@@ -388,7 +388,7 @@ echo "server=1" >> /home/proxynode3/prx.conf
 echo "daemon=1" >> /home/proxynode3/prx.conf
 echo "maxconnections=250" >> /home/proxynode3/prx.conf
 echo "masternode=1" >> /home/proxynode3/prx.conf
-echo "rpcport=12198" >> /home/proxynode3/prx.conf
+echo "rpcport=12298" >> /home/proxynode3/prx.conf
 echo "listen=0" >> /home/proxynode3/prx.conf
 echo "externalip=[${MNIP3}]:12195" >> /home/proxynode3/prx.conf
 echo "masternodeprivkey=$MNKEY3" >> /home/proxynode3/prx.conf
@@ -421,7 +421,7 @@ echo "server=1" >> /home/proxynode4/prx.conf
 echo "daemon=1" >> /home/proxynode4/prx.conf
 echo "maxconnections=250" >> /home/proxynode4/prx.conf
 echo "masternode=1" >> /home/proxynode4/prx.conf
-echo "rpcport=12199" >> /home/proxynode4/prx.conf
+echo "rpcport=12299" >> /home/proxynode4/prx.conf
 echo "listen=0" >> /home/proxynode4/prx.conf
 echo "externalip=[${MNIP4}]:12195" >> /home/proxynode4/prx.conf
 echo "masternodeprivkey=$MNKEY4" >> /home/proxynode4/prx.conf
