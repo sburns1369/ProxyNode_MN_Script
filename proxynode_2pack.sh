@@ -183,7 +183,7 @@ fi
 cd ~
 touch prxcheck.tmp
 ps aux | grep proxynode >> prxcheck.tmp
-if grep home/proxynode/.prx prxcheck.tmp
+if grep home/proxynode/.proxynode prxcheck.tmp
 then
 echo Found OLD ${NC} prx Node running
 OldNode="1"
@@ -192,7 +192,7 @@ echo No ${NC} prx Node not running
 OldNode="0"
 fi
 until [[ $NC = 9 ]]; do
-if grep /home/proxynode${NC}/.prx prxcheck.tmp
+if grep /home/proxynode${NC}/.proxynode prxcheck.tmp
 then
 echo Found ${NC} prx Node running
 declare IPN$NC="1"
@@ -246,9 +246,10 @@ echo "Downloading latest ProxyNode binaries"
 wget https://github.com/ProxyNode/proxynode/releases/download/v1.0.0/Linux.zip
 unzip Linux.zip
 sleep 3
-sudo mv /root/Linux/bin/prx/prxd /root/Linux/bin/prx/prx-cli /usr/local/bin
-sudo chmod 755 -R /usr/local/bin/proxynode*
-rm -rf /root//Linux/bin/prx/
+sudo mv /root/prx/Linux/bin/prxd /root/prx/Linux/bin/prx-cli /usr/local/bin
+#fixed
+sudo chmod 755 -R /usr/local/bin/prx*
+rm -rf /root/Linux/bin/prx/
 if [ ! -f /home/proxynode1/.proxynode/prx.conf ]; then
 echo -e "${GREEN}Configuring First ProxyNode Node${CLEAR}"
 sudo mkdir /home/proxynode/.proxynode
