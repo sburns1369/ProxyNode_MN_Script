@@ -1249,7 +1249,7 @@ echo "addnode=99.246.100.151:40734" >> /home/${COINl}${nodeunit}/.${COINl}/${COI
   ${COINDAEMONCLI} -datadir=/home/${COINl}/${COINCORE} stop
   sleep 10
   nodedown=$[$nodeunit-1]
-  sudo cp -r /home/${COINl}${nodedown}/.${COINl}${nodedown}/* /home/${COINl}2/.${COINl}/
+  sudo cp -r /home/${COINl}${nodedown}/.${COINl}${nodedown}/* /home/${COINl}${nodeunit}/.${COINl}/
   sudo rm /home/${COINl}${nodeunit}/.${COINl}/${COINCONFIG}
   sudo cp -r /home/${COINl}${nodeunit}/${COINCONFIG} /home/${COINl}${nodeunit}/.${COINl}/${COINCONFIG}
   sleep 5
@@ -1456,16 +1456,16 @@ echo "addnode=99.246.100.151:40734" >> /home/${COINl}${nodeunit}/.${COINl}/${COI
       nodeunit=
       stop_masternode
       nodeunit=1
-      function_user_add_check
-      if [ ! -d /home/${COINl}1/.${COINl} ]; then
-        echo "Making /home/${COINl}1/.${COINl}"
-        sudo mkdir /home/${COINl}1/.${COINl}
+      #function_user_add_check
+      #if [ ! -d /home/${COINl}1/.${COINl} ]; then
+      #  echo "Making /home/${COINl}1/.${COINl}"
+      #  sudo mkdir /home/${COINl}1/.${COINl}
+      #  sudo cp -r /home/${COINl}/.${COINl}/* /home/${COINl}1/.${COINl}/
+      #  start_masternode
+      sudo usermod --login proxynode1 --move-home -d --home  /home/${COINl} proxynode
       else
-        echo fatal error
+        echo fatal error - here be dragons
       fi
-  else
-  echo Script appears to have encountered a dragon.
-fi
   }
 
   # installation Core
