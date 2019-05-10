@@ -249,7 +249,7 @@ sleep 3
 sudo mv /root/prx/Linux/bin/prxd /root/prx/Linux/bin/prx-cli /usr/local/bin
 #fixed
 sudo chmod 755 -R /usr/local/bin/prx*
-rm -rf /root/Linux/bin/prx/
+rm -rf /root/prx
 if [ ! -f /home/proxynode1/.proxynode/prx.conf ]; then
 echo -e "${GREEN}Configuring First ProxyNode Node${CLEAR}"
 sudo mkdir /home/proxynode/.proxynode
