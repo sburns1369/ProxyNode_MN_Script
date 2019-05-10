@@ -183,7 +183,7 @@ fi
 cd ~
 touch prxcheck.tmp
 ps aux | grep proxynode >> prxcheck.tmp
-if grep home/proxynode/.proxynode prxcheck.tmp
+if grep /home/proxynode/.proxynode prxcheck.tmp
 then
 echo Found OLD ${NC} prx Node running
 OldNode="1"
@@ -261,7 +261,7 @@ echo "server=1" >> /home/proxynode1/.proxynode/prx.conf
 echo "daemon=1" >> /home/proxynode1/.proxynode/prx.conf
 echo "maxconnections=250" >> /home/proxynode1/.proxynode/prx.conf
 echo "masternode=1" >> /home/proxynode1/.proxynode/prx.conf
-echo "rpcport=12195" >> /home/proxynode1/.proxynode/prx.conf
+echo "rpcport=12295" >> /home/proxynode1/.proxynode/prx.conf
 echo "listen=0" >> /home/proxynode1/.proxynode/prx.conf
 echo "externalip=[${MNIP1}]:12195" >> /home/proxynode1/.proxynode/prx.conf
 echo "masternodeprivkey=$MNKEY" >> /home/proxynode1/.proxynode/prx.conf
@@ -304,7 +304,7 @@ echo "server=1" >> /home/proxynode2/prx.conf
 echo "daemon=1" >> /home/proxynode2/prx.conf
 echo "maxconnections=250" >> /home/proxynode2/prx.conf
 echo "masternode=1" >> /home/proxynode2/prx.conf
-echo "rpcport=12196" >> /home/proxynode2/prx.conf
+echo "rpcport=12296" >> /home/proxynode2/prx.conf
 echo "listen=0" >> /home/proxynode2/prx.conf
 echo "externalip=[${MNIP2}]:12195" >> /home/proxynode2/prx.conf
 echo "masternodeprivkey=$MNKEY2" >> /home/proxynode2/prx.conf

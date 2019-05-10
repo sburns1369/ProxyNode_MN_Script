@@ -1026,11 +1026,11 @@ echo -e "         ."
   function_first_nodecheck(){
         if [ -d /home/${COINl} ]; then
           echo -e ${GREEN}"Found ${COINl}-Oldnode Installation Found - /home/${COINl}" ${CLEAR}
-          pause
+          #test_pause
         else
           if [ -d /home/${COINl}1 ]; then
           echo -e ${GREEN}"Found ${COINl} Masternode Installation Found - /home/${COINl}" ${CLEAR}
-          pause
+          #test_pause
         else
         #install FirstMasternode - Start!
         nodeunit=1
