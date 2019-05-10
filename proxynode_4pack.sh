@@ -217,7 +217,7 @@ fi
 cd ~
 touch prxcheck.tmp
 ps aux | grep proxynode >> prxcheck.tmp
-if grep home/proxynode/.proxynode prxcheck.tmp
+if grep /home/proxynode/.proxynode prxcheck.tmp
 then
 echo Found OLD ${NC} prx Node running
 OldNode="1"

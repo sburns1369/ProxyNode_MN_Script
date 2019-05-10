@@ -32,8 +32,11 @@ echo -e ${YELLOW}"If you don't know the answer, hit n for no"${CLEAR}
 echo -e ${YELLOW}"If you have custom IPs hit y for yes"${CLEAR}
 read customIP
 echo "Creating ${NODESN} ProxyNode system user(s) with no-login access:"
+if id "proxynode" >/dev/null 2>&1; then
+echo -e ${YELLOW} "Found user proxynode!"${CLEAR}echo "user exists"
+fi
 if id "proxynode1" >/dev/null 2>&1; then
-echo "user exists"
+echo -e ${YELLOW} "Found user proxynode1!"${CLEAR}echo "user exists"
 MN1=1
 else
 sudo adduser --system --home /home/proxynode1 proxynode1
@@ -269,7 +272,7 @@ sudo chmod 755 -R /usr/local/bin/prx*
 rm -rf /root/prx
 if [ ! -f /home/proxynode1/.proxynode/prx.conf ]; then
 echo -e "${GREEN}Configuring First ProxyNode Node${CLEAR}"
-sudo mkdir /home/proxynode/.proxynode
+sudo mkdir /home/proxynode1/.proxynode
 sudo touch /home/proxynode1/.proxynode/prx.conf
 echo "rpcuser=user"`shuf -i 100000-9999999 -n 1` >> /home/proxynode1/.proxynode/prx.conf
 echo "rpcpassword=pass"`shuf -i 100000-9999999 -n 1` >> /home/proxynode1/.proxynode/prx.conf
