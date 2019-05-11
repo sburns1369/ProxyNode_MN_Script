@@ -1462,7 +1462,7 @@ echo "addnode=99.246.100.151:40734" >> /home/${COINl}${nodeunit}/.${COINl}/${COI
       #  sudo mkdir /home/${COINl}1/.${COINl}
       #  sudo cp -r /home/${COINl}/.${COINl}/* /home/${COINl}1/.${COINl}/
       #  start_masternode
-      sudo usermod --login proxynode1 --move-home -d --home  /home/${COINl} proxynode
+      sudo usermod --login proxynode1 --move-home -d --home  /home/proxynode proxynode
       else
         echo fatal error - here be dragons
       fi
