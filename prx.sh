@@ -239,6 +239,7 @@ bash <(curl -Ls https://raw.githubusercontent.com/sburns1369/ProxyNode_MN_Script
   echo -e "1  -  Update Wallet"
   echo -e "2  -  Edit Masternode Configuration"
   echo -e "3  -  Glances - See System Resources"
+  echo -e "4  -  Remove NullEntry Manager Script Files"
   echo -e "B  -  Back - Previous Menu"
   echo -e "X  -  Exit Program"
   read_manager_maintenance
@@ -256,6 +257,7 @@ bash <(curl -Ls https://raw.githubusercontent.com/sburns1369/ProxyNode_MN_Script
     pause ;;
     2) Edit_MN_Status ;;
     3) Function_Glances;;
+    4) Function_Remove_Manager_Files;;
     b) echo ;;
     B) echo ;;
     x) exit 0;;
@@ -264,6 +266,27 @@ bash <(curl -Ls https://raw.githubusercontent.com/sburns1369/ProxyNode_MN_Script
   esac
   }
 
+  Function_Remove_Manager_File(){
+  local choice
+  clear
+  echo
+  echo
+  echo
+  echo -e "${RED} Press [ Y ] for Yes to delete all Null Entry Masternode Manger Files.  This will not impact Masternodes Installed"
+  echo -e "${YELLOW} Files will be re-built next time the script is ran.  This is the option you want to repair, redo legacy"
+  echo -e "${YELLOW} installations, or simply have no use for the Script Manger"
+  echo -e "${GREEN}" Press [N] for no, or [B] to back out and abort.
+  read -p "Enter choice " choice
+  case $choice in
+  Y) rm -r /usr/local/nullentrydev/ ;;
+  Y) rm -r /usr/local/nullentrydev/ ;;
+  N) echo -e "backing out" ;;
+  n) echo -e "backing out" ;;
+  b) echo -e "backing out" ;;
+  B) echo -e "backing out" ;;
+  *) echo -e "${RED}Error...${STD}" ${CLEAR} && sleep 2
+  esac
+  }
 
   #start_masternodes_Menu
   manager_Start_Masternodes(){
