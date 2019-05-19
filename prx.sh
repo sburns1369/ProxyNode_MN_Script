@@ -1667,6 +1667,7 @@ Function_Read_Masternode_Key_Table(){
       echo -e "${COIN3l}12 [${MNIP12}]:$COINPORT $PRIVK12 [Transaction ID] [Transaction Output]"
     fi
     echo
+    pause
   }
 #testpoint
   Function_Install_Secondaries(){
