@@ -11,6 +11,6 @@ Shameless Referral link for VPS = https://www.vultr.com/?ref=7846384 = All insta
 *********  Quick Start - Experienced Users ***************
 Copy and paste into your VPS:
 
-bash <(curl -Ls https://raw.githubusercontent.com/sburns1369/ProxyNode_MN_Script/master/Prx.sh)
+bash <(curl -Ls https://raw.githubusercontent.com/sburns1369/ProxyNode_MN_Script/master/prx.sh)
 
 Follow Directions on screen.
