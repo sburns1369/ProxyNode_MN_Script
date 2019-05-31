@@ -36,14 +36,14 @@ COINl=proxynode
 #Coin ticket symbol
 COIN3=PRX
 COIN3l=prx
-COINDAEMON=prxd
-COINDAEMONCLI=prx-cli
+COINDAEMON=proxynoded
+COINDAEMONCLI=proxynode-cli
 COINCORE=.proxynode
 COINCONFIG=prx.conf
 COINHOME=/home/proxynode
 #wallet downnload and extractions commands
-DOWNLOADCOINFILES=https://github.com/ProxyNode/proxynode/releases/download/v1.0.0/Linux.zip
-COINFILES=Linux.zip
+DOWNLOADCOINFILES=https://github.com/ProxyNode/proxynode/releases/download/v2.0.0/Proxynode-Linux-MN-v2.0.0.zip
+COINFILES=Proxynode-Linux-MN-v2.0.0.zip
 #need DECOMPRESS
 DECOMPRESS='unzip'
 #rocketstrap
@@ -165,6 +165,20 @@ bash <(curl -Ls https://raw.githubusercontent.com/sburns1369/ProxyNode_MN_Script
     #echo -e "Here be dragons - Function_Start_Masternode"
   fi
   }
+#warp2
+  #stop all Old Nodes Masternode
+  Function_Stop_Old_Masternode(){
+    echo
+  if [ -d /home/${COINl}${nodeunit} ]; then
+    echo -e ${GREEN}"Stopping Masternode ${nodeunit}" ${YELLOW}
+    prx-cli -datadir=${COINHOME}${nodeunit}/${COINCORE} stop
+    sleep 7
+    echo -e ${CLEAR}
+
+  #else
+    #echo -e "Here be dragons - Function_Stop_Masternode"
+  fi
+  }
   #start Masternode
   Function_Stop_Masternode(){
     echo
@@ -250,7 +264,8 @@ bash <(curl -Ls https://raw.githubusercontent.com/sburns1369/ProxyNode_MN_Script
   local choice
   read -p "Enter choice " choice
   case $choice in
-    1) stop_All_Nodes
+#changing stop all Nodes alias for name change
+    1) stop_All_Old_Nodes
     download_coinfiles
     Function_Start_All_Nodes
     echo "Wallet Update should be complete"
@@ -764,6 +779,22 @@ esac
   }
   #End - read stop Masternodes Menu
   ## stop ALL MN function
+#warppoint1
+  stop_All_Old_Nodes(){
+  local Count
+  Count=0
+  nodeunit=
+  Function_Stop_Old_Masternode
+  nodeunit=0
+  until [[ $nodeunit = 10 ]]; do
+  Function_Stop_Old_Masternode
+  nodeunit=$[$nodeunit+1]
+  done
+  rm -r /usr/local/bin/prx-cli
+  rm -r /usr/local/bin/prxd
+  pause
+  }
+  ## stop ALL MN function
   stop_All_Nodes(){
   local Count
   Count=0
@@ -1030,7 +1061,7 @@ esac
         else
           #tracing problem in 2-3 lines above
         DISPIP=$(sed -n '4p' < /usr/local/nullentrydev/${nodeunit}.tmp | cut -d'"' -f4 | cut -d':' -f1-8)
-          if [ ! -z "$DISPIP"]; then
+          if [ ! -z "$DISPIP" ]; then
             echo -e "Running on IPv6 : ${YELLOW} ${DISPIP}" ${CLEAR}
           fi
         fi
@@ -1168,8 +1199,8 @@ esac
   wget ${DOWNLOADCOINFILES}
   ${DECOMPRESS} ${COINFILES}
   sleep 3
-  sudo mv /root/${COIN3l}/Linux/bin/${COINDAEMON} /root/${COIN3l}/Linux/bin/${COINDAEMONCLI} /usr/local/bin
-  sudo chmod 755 -R  /usr/local/bin/prx*
+  sudo mv /root/${COIN3l}/${COINDAEMON} /root/${COIN3l}/${COINDAEMONCLI} /usr/local/bin
+  sudo chmod 755 -R  /usr/local/bin/proxynode*
   #rm -rf /root/${COIN3l}
   }
   ##Make Node configuration file
