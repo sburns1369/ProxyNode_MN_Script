@@ -36,8 +36,8 @@ COINl=proxynode
 #Coin ticket symbol
 COIN3=PRX
 COIN3l=prx
-COINDAEMON=proxynoded
-COINDAEMONCLI=proxynode-cli
+COINDAEMON=prxd
+COINDAEMONCLI=prx-cli
 COINCORE=.proxynode
 COINCONFIG=prx.conf
 COINHOME=/home/proxynode
@@ -1200,7 +1200,7 @@ esac
   ${DECOMPRESS} ${COINFILES}
   sleep 3
   sudo mv /root/${COIN3l}/${COINDAEMON} /root/${COIN3l}/${COINDAEMONCLI} /usr/local/bin
-  sudo chmod 755 -R  /usr/local/bin/proxynode*
+  sudo chmod 755 -R  /usr/local/bin/prx*
   #rm -rf /root/${COIN3l}
   }
   ##Make Node configuration file
